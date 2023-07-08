@@ -1,0 +1,10 @@
+class: Player
+table: player
+fields:
+  name: String
+  emailId: String
+  contactNumber: String
+  city: String
+  gender: String
+  dateOfBirth: DateTime
+  role: String

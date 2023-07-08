@@ -8,10 +8,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/example_endpoint.dart' as _i2;
-import '../endpoints/sport_category_endpoint.dart' as _i3;
-import '../endpoints/sport_venue_endpoint.dart' as _i4;
-import 'package:sportify_server/src/generated/sport_category.dart' as _i5;
-import 'package:sportify_server/src/generated/sport_venue.dart' as _i6;
+import '../endpoints/player_endpoint.dart' as _i3;
+import '../endpoints/sport_category_endpoint.dart' as _i4;
+import '../endpoints/sport_venue_endpoint.dart' as _i5;
+import 'package:sportify_server/src/generated/player.dart' as _i6;
+import 'package:sportify_server/src/generated/sport_category.dart' as _i7;
+import 'package:sportify_server/src/generated/sport_venue.dart' as _i8;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -23,13 +25,19 @@ class Endpoints extends _i1.EndpointDispatch {
           'example',
           null,
         ),
-      'sportCategory': _i3.SportCategoryEndpoint()
+      'player': _i3.PlayerEndpoint()
+        ..initialize(
+          server,
+          'player',
+          null,
+        ),
+      'sportCategory': _i4.SportCategoryEndpoint()
         ..initialize(
           server,
           'sportCategory',
           null,
         ),
-      'sportVenue': _i4.SportVenueEndpoint()
+      'sportVenue': _i5.SportVenueEndpoint()
         ..initialize(
           server,
           'sportVenue',
@@ -60,6 +68,94 @@ class Endpoints extends _i1.EndpointDispatch {
         )
       },
     );
+    connectors['player'] = _i1.EndpointConnector(
+      name: 'player',
+      endpoint: endpoints['player']!,
+      methodConnectors: {
+        'getAllPlayers': _i1.MethodConnector(
+          name: 'getAllPlayers',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['player'] as _i3.PlayerEndpoint)
+                  .getAllPlayers(session),
+        ),
+        'getPlayerById': _i1.MethodConnector(
+          name: 'getPlayerById',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['player'] as _i3.PlayerEndpoint).getPlayerById(
+            session,
+            params['id'],
+          ),
+        ),
+        'addPlayer': _i1.MethodConnector(
+          name: 'addPlayer',
+          params: {
+            'player': _i1.ParameterDescription(
+              name: 'player',
+              type: _i1.getType<_i6.Player>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['player'] as _i3.PlayerEndpoint).addPlayer(
+            session,
+            params['player'],
+          ),
+        ),
+        'updatePlayer': _i1.MethodConnector(
+          name: 'updatePlayer',
+          params: {
+            'player': _i1.ParameterDescription(
+              name: 'player',
+              type: _i1.getType<_i6.Player>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['player'] as _i3.PlayerEndpoint).updatePlayer(
+            session,
+            params['player'],
+          ),
+        ),
+        'delete': _i1.MethodConnector(
+          name: 'delete',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['player'] as _i3.PlayerEndpoint).delete(
+            session,
+            params['id'],
+          ),
+        ),
+      },
+    );
     connectors['sportCategory'] = _i1.EndpointConnector(
       name: 'sportCategory',
       endpoint: endpoints['sportCategory']!,
@@ -71,7 +167,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .getAllSportCategories(session),
         ),
         'getSportCategoryById': _i1.MethodConnector(
@@ -87,7 +183,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .getSportCategoryById(
             session,
             params['id'],
@@ -106,7 +202,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .getSportsCategoryByName(
             session,
             keyword: params['keyword'],
@@ -117,7 +213,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportCategory': _i1.ParameterDescription(
               name: 'sportCategory',
-              type: _i1.getType<_i5.SportCategory>(),
+              type: _i1.getType<_i7.SportCategory>(),
               nullable: false,
             )
           },
@@ -125,7 +221,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .addSportsCategory(
             session,
             params['sportCategory'],
@@ -136,7 +232,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportCategory': _i1.ParameterDescription(
               name: 'sportCategory',
-              type: _i1.getType<_i5.SportCategory>(),
+              type: _i1.getType<_i7.SportCategory>(),
               nullable: false,
             )
           },
@@ -144,7 +240,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .updateSportCategory(
             session,
             params['sportCategory'],
@@ -163,7 +259,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportCategory'] as _i3.SportCategoryEndpoint)
+              (endpoints['sportCategory'] as _i4.SportCategoryEndpoint)
                   .deleteSportCategory(
             session,
             params['id'],
@@ -182,7 +278,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint)
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint)
                   .getAllSportVenues(session),
         ),
         'getSportVenueById': _i1.MethodConnector(
@@ -198,7 +294,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint)
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint)
                   .getSportVenueById(
             session,
             params['id'],
@@ -217,7 +313,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint)
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint)
                   .getSportVenuesByName(
             session,
             keyword: params['keyword'],
@@ -228,7 +324,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportVenue': _i1.ParameterDescription(
               name: 'sportVenue',
-              type: _i1.getType<_i6.SportVenue>(),
+              type: _i1.getType<_i8.SportVenue>(),
               nullable: false,
             )
           },
@@ -236,7 +332,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint).addSportVenue(
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint).addSportVenue(
             session,
             params['sportVenue'],
           ),
@@ -246,7 +342,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportVenue': _i1.ParameterDescription(
               name: 'sportVenue',
-              type: _i1.getType<_i6.SportVenue>(),
+              type: _i1.getType<_i8.SportVenue>(),
               nullable: false,
             )
           },
@@ -254,7 +350,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint)
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint)
                   .updateSportVenue(
             session,
             params['sportVenue'],
@@ -273,7 +369,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['sportVenue'] as _i4.SportVenueEndpoint)
+              (endpoints['sportVenue'] as _i5.SportVenueEndpoint)
                   .deleteSportVenue(
             session,
             params['id'],
