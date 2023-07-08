@@ -1,0 +1,6 @@
+class: SportCategory
+table: sport_category
+fields:
+  name: String
+  isTeamSport: bool
+  popularity: int
