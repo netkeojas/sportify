@@ -13,13 +13,17 @@ import 'example.dart' as _i3;
 import 'player.dart' as _i4;
 import 'sport_category.dart' as _i5;
 import 'sport_venue.dart' as _i6;
-import 'package:sportify_server/src/generated/player.dart' as _i7;
-import 'package:sportify_server/src/generated/sport_category.dart' as _i8;
-import 'package:sportify_server/src/generated/sport_venue.dart' as _i9;
+import 'sport_venue_has_sport_category.dart' as _i7;
+import 'package:sportify_server/src/generated/player.dart' as _i8;
+import 'package:sportify_server/src/generated/sport_category.dart' as _i9;
+import 'package:sportify_server/src/generated/sport_venue.dart' as _i10;
+import 'package:sportify_server/src/generated/sport_venue_has_sport_category.dart'
+    as _i11;
 export 'example.dart';
 export 'player.dart';
 export 'sport_category.dart';
 export 'sport_venue.dart';
+export 'sport_venue_has_sport_category.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -247,6 +251,49 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
+    _i2.TableDefinition(
+      name: 'sport_venue_has_sport_category',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault:
+              'nextval(\'sport_venue_has_sport_category_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'sportVenueId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'sportCategoryId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'sport_venue_has_sport_category_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
     ..._i2.Protocol.targetDatabaseDefinition.tables,
   ]);
 
@@ -271,6 +318,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i6.SportVenue) {
       return _i6.SportVenue.fromJson(data, this) as T;
     }
+    if (t == _i7.SportVenueHasSportCategory) {
+      return _i7.SportVenueHasSportCategory.fromJson(data, this) as T;
+    }
     if (t == _i1.getType<_i3.Example?>()) {
       return (data != null ? _i3.Example.fromJson(data, this) : null) as T;
     }
@@ -284,6 +334,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i6.SportVenue?>()) {
       return (data != null ? _i6.SportVenue.fromJson(data, this) : null) as T;
     }
+    if (t == _i1.getType<_i7.SportVenueHasSportCategory?>()) {
+      return (data != null
+          ? _i7.SportVenueHasSportCategory.fromJson(data, this)
+          : null) as T;
+    }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
@@ -291,18 +346,23 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
     }
-    if (t == List<_i7.Player>) {
-      return (data as List).map((e) => deserialize<_i7.Player>(e)).toList()
+    if (t == List<_i8.Player>) {
+      return (data as List).map((e) => deserialize<_i8.Player>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i8.SportCategory>) {
+    if (t == List<_i9.SportCategory>) {
       return (data as List)
-          .map((e) => deserialize<_i8.SportCategory>(e))
+          .map((e) => deserialize<_i9.SportCategory>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i9.SportVenue>) {
-      return (data as List).map((e) => deserialize<_i9.SportVenue>(e)).toList()
+    if (t == List<_i10.SportVenue>) {
+      return (data as List).map((e) => deserialize<_i10.SportVenue>(e)).toList()
           as dynamic;
+    }
+    if (t == List<_i11.SportVenueHasSportCategory>) {
+      return (data as List)
+          .map((e) => deserialize<_i11.SportVenueHasSportCategory>(e))
+          .toList() as dynamic;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
@@ -324,6 +384,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i6.SportVenue) {
       return 'SportVenue';
     }
+    if (data is _i7.SportVenueHasSportCategory) {
+      return 'SportVenueHasSportCategory';
+    }
     return super.getClassNameForObject(data);
   }
 
@@ -340,6 +403,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (data['className'] == 'SportVenue') {
       return deserialize<_i6.SportVenue>(data['data']);
+    }
+    if (data['className'] == 'SportVenueHasSportCategory') {
+      return deserialize<_i7.SportVenueHasSportCategory>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -359,6 +425,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i5.SportCategory.t;
       case _i6.SportVenue:
         return _i6.SportVenue.t;
+      case _i7.SportVenueHasSportCategory:
+        return _i7.SportVenueHasSportCategory.t;
     }
     return null;
   }
