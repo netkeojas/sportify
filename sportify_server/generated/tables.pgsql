@@ -1,4 +1,23 @@
 --
+-- Class Player as table player
+--
+
+CREATE TABLE "player" (
+  "id" serial,
+  "name" text NOT NULL,
+  "emailId" text NOT NULL,
+  "contactNumber" text NOT NULL,
+  "city" text NOT NULL,
+  "gender" text NOT NULL,
+  "dateOfBirth" timestamp without time zone NOT NULL,
+  "role" text NOT NULL
+);
+
+ALTER TABLE ONLY "player"
+  ADD CONSTRAINT player_pkey PRIMARY KEY (id);
+
+
+--
 -- Class SportCategory as table sport_category
 --
 
