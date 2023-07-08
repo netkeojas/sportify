@@ -13,16 +13,19 @@ import 'player.dart' as _i3;
 import 'sport_category.dart' as _i4;
 import 'sport_venue.dart' as _i5;
 import 'sport_venue_has_sport_category.dart' as _i6;
-import 'package:sportify_client/src/protocol/player.dart' as _i7;
-import 'package:sportify_client/src/protocol/sport_category.dart' as _i8;
-import 'package:sportify_client/src/protocol/sport_venue.dart' as _i9;
+import 'venue_sport_has_area.dart' as _i7;
+import 'package:sportify_client/src/protocol/player.dart' as _i8;
+import 'package:sportify_client/src/protocol/sport_category.dart' as _i9;
+import 'package:sportify_client/src/protocol/sport_venue.dart' as _i10;
 import 'package:sportify_client/src/protocol/sport_venue_has_sport_category.dart'
-    as _i10;
+    as _i11;
+import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i12;
 export 'example.dart';
 export 'player.dart';
 export 'sport_category.dart';
 export 'sport_venue.dart';
 export 'sport_venue_has_sport_category.dart';
+export 'venue_sport_has_area.dart';
 export 'client.dart';
 
 class Protocol extends _i1.SerializationManager {
@@ -58,6 +61,9 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i6.SportVenueHasSportCategory) {
       return _i6.SportVenueHasSportCategory.fromJson(data, this) as T;
     }
+    if (t == _i7.VenueSportHasArea) {
+      return _i7.VenueSportHasArea.fromJson(data, this) as T;
+    }
     if (t == _i1.getType<_i2.Example?>()) {
       return (data != null ? _i2.Example.fromJson(data, this) : null) as T;
     }
@@ -76,6 +82,10 @@ class Protocol extends _i1.SerializationManager {
           ? _i6.SportVenueHasSportCategory.fromJson(data, this)
           : null) as T;
     }
+    if (t == _i1.getType<_i7.VenueSportHasArea?>()) {
+      return (data != null ? _i7.VenueSportHasArea.fromJson(data, this) : null)
+          as T;
+    }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
@@ -83,22 +93,27 @@ class Protocol extends _i1.SerializationManager {
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
     }
-    if (t == List<_i7.Player>) {
-      return (data as List).map((e) => deserialize<_i7.Player>(e)).toList()
+    if (t == List<_i8.Player>) {
+      return (data as List).map((e) => deserialize<_i8.Player>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i8.SportCategory>) {
+    if (t == List<_i9.SportCategory>) {
       return (data as List)
-          .map((e) => deserialize<_i8.SportCategory>(e))
+          .map((e) => deserialize<_i9.SportCategory>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i9.SportVenue>) {
-      return (data as List).map((e) => deserialize<_i9.SportVenue>(e)).toList()
+    if (t == List<_i10.SportVenue>) {
+      return (data as List).map((e) => deserialize<_i10.SportVenue>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i10.SportVenueHasSportCategory>) {
+    if (t == List<_i11.SportVenueHasSportCategory>) {
       return (data as List)
-          .map((e) => deserialize<_i10.SportVenueHasSportCategory>(e))
+          .map((e) => deserialize<_i11.SportVenueHasSportCategory>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i12.VenueSportHasArea>) {
+      return (data as List)
+          .map((e) => deserialize<_i12.VenueSportHasArea>(e))
           .toList() as dynamic;
     }
     return super.deserialize<T>(data, t);
@@ -121,6 +136,9 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i6.SportVenueHasSportCategory) {
       return 'SportVenueHasSportCategory';
     }
+    if (data is _i7.VenueSportHasArea) {
+      return 'VenueSportHasArea';
+    }
     return super.getClassNameForObject(data);
   }
 
@@ -140,6 +158,9 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data['className'] == 'SportVenueHasSportCategory') {
       return deserialize<_i6.SportVenueHasSportCategory>(data['data']);
+    }
+    if (data['className'] == 'VenueSportHasArea') {
+      return deserialize<_i7.VenueSportHasArea>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

@@ -1,0 +1,5 @@
+class: VenueSportHasArea
+table: venue_sport_has_area
+fields:
+  sportVenueHasSportCategoryId: int
+  name: String

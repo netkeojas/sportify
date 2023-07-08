@@ -4,7 +4,8 @@ import '../generated/protocol.dart';
 class PlayerEndpoint extends Endpoint {
   /* Fetches all the  players present in the database
    @param session - default
-   @return List of type Player => [{ name: 'tck'
+   @return List of type Player => [{ id: 1001,
+   name: 'tck'
   emailId: 'email.com', 
   contactNumber: '12345678', 
   city: 'Kolhapur', 
@@ -18,7 +19,7 @@ class PlayerEndpoint extends Endpoint {
 
 /* Fetches  the  player present in the database by id
    @param session - default
-   @return  Player object/record => { name: 'tck'
+   @return  Player object/record => {id: 1001, name: 'tck'
   emailId: 'email.com', 
   contactNumber: '12345678', 
   city: 'Kolhapur', 

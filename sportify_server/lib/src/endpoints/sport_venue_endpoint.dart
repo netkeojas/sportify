@@ -4,7 +4,7 @@ import '../generated/protocol.dart';
 class SportVenueEndpoint extends Endpoint {
   /* Fetches all the sports venues present in the database
    @param session - default
-   @return List of type SportVenue => [{ name: 'tck'
+   @return List of type SportVenue => [{ id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
   openTiming: '6am - 11pm'
@@ -24,7 +24,7 @@ class SportVenueEndpoint extends Endpoint {
 /* Fetches the sports venue present in the database for given id
    @param session - default
    @param id - Int Id
-   @return Object/record of type SportVenue => { name: 'tck'
+   @return Object/record of type SportVenue => { id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
   openTiming: '6am - 11pm'
@@ -43,7 +43,7 @@ class SportVenueEndpoint extends Endpoint {
 /* Fetches all the sports venues present in the database with given name
    @param session - default
    @param keyword - String name
-   @return List of type SportVenue => [{ name: 'tck'
+   @return List of type SportVenue => [{ id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
   openTiming: '6am - 11pm'
