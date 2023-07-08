@@ -11,9 +11,12 @@ import '../endpoints/example_endpoint.dart' as _i2;
 import '../endpoints/player_endpoint.dart' as _i3;
 import '../endpoints/sport_category_endpoint.dart' as _i4;
 import '../endpoints/sport_venue_endpoint.dart' as _i5;
-import 'package:sportify_server/src/generated/player.dart' as _i6;
-import 'package:sportify_server/src/generated/sport_category.dart' as _i7;
-import 'package:sportify_server/src/generated/sport_venue.dart' as _i8;
+import '../endpoints/sport_venue_has_sport_category_endpoint.dart' as _i6;
+import 'package:sportify_server/src/generated/player.dart' as _i7;
+import 'package:sportify_server/src/generated/sport_category.dart' as _i8;
+import 'package:sportify_server/src/generated/sport_venue.dart' as _i9;
+import 'package:sportify_server/src/generated/sport_venue_has_sport_category.dart'
+    as _i10;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -41,6 +44,12 @@ class Endpoints extends _i1.EndpointDispatch {
         ..initialize(
           server,
           'sportVenue',
+          null,
+        ),
+      'sportVenueHasSportCategory': _i6.SportVenueHasSportCategoryEndpoint()
+        ..initialize(
+          server,
+          'sportVenueHasSportCategory',
           null,
         ),
     };
@@ -105,7 +114,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'player': _i1.ParameterDescription(
               name: 'player',
-              type: _i1.getType<_i6.Player>(),
+              type: _i1.getType<_i7.Player>(),
               nullable: false,
             )
           },
@@ -123,7 +132,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'player': _i1.ParameterDescription(
               name: 'player',
-              type: _i1.getType<_i6.Player>(),
+              type: _i1.getType<_i7.Player>(),
               nullable: false,
             )
           },
@@ -213,7 +222,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportCategory': _i1.ParameterDescription(
               name: 'sportCategory',
-              type: _i1.getType<_i7.SportCategory>(),
+              type: _i1.getType<_i8.SportCategory>(),
               nullable: false,
             )
           },
@@ -232,7 +241,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportCategory': _i1.ParameterDescription(
               name: 'sportCategory',
-              type: _i1.getType<_i7.SportCategory>(),
+              type: _i1.getType<_i8.SportCategory>(),
               nullable: false,
             )
           },
@@ -324,7 +333,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportVenue': _i1.ParameterDescription(
               name: 'sportVenue',
-              type: _i1.getType<_i8.SportVenue>(),
+              type: _i1.getType<_i9.SportVenue>(),
               nullable: false,
             )
           },
@@ -342,7 +351,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'sportVenue': _i1.ParameterDescription(
               name: 'sportVenue',
-              type: _i1.getType<_i8.SportVenue>(),
+              type: _i1.getType<_i9.SportVenue>(),
               nullable: false,
             )
           },
@@ -373,6 +382,63 @@ class Endpoints extends _i1.EndpointDispatch {
                   .deleteSportVenue(
             session,
             params['id'],
+          ),
+        ),
+      },
+    );
+    connectors['sportVenueHasSportCategory'] = _i1.EndpointConnector(
+      name: 'sportVenueHasSportCategory',
+      endpoint: endpoints['sportVenueHasSportCategory']!,
+      methodConnectors: {
+        'getAllSportVenueHasSportCategory': _i1.MethodConnector(
+          name: 'getAllSportVenueHasSportCategory',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['sportVenueHasSportCategory']
+                      as _i6.SportVenueHasSportCategoryEndpoint)
+                  .getAllSportVenueHasSportCategory(session),
+        ),
+        'getSportVenueHasSportCategoryByVenueId': _i1.MethodConnector(
+          name: 'getSportVenueHasSportCategoryByVenueId',
+          params: {
+            'venueId': _i1.ParameterDescription(
+              name: 'venueId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['sportVenueHasSportCategory']
+                      as _i6.SportVenueHasSportCategoryEndpoint)
+                  .getSportVenueHasSportCategoryByVenueId(
+            session,
+            venueId: params['venueId'],
+          ),
+        ),
+        'addSportVenueHasSportCategory': _i1.MethodConnector(
+          name: 'addSportVenueHasSportCategory',
+          params: {
+            'sportVenueHasSportCategory': _i1.ParameterDescription(
+              name: 'sportVenueHasSportCategory',
+              type: _i1.getType<_i10.SportVenueHasSportCategory>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['sportVenueHasSportCategory']
+                      as _i6.SportVenueHasSportCategoryEndpoint)
+                  .addSportVenueHasSportCategory(
+            session,
+            params['sportVenueHasSportCategory'],
           ),
         ),
       },

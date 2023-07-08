@@ -1,0 +1,5 @@
+class: SportVenueHasSportCategory
+table: sport_venue_has_sport_category
+fields:
+  sportVenueId: int
+  sportCategoryId: int

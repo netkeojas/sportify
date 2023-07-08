@@ -55,3 +55,17 @@ ALTER TABLE ONLY "sport_venue"
   ADD CONSTRAINT sport_venue_pkey PRIMARY KEY (id);
 
 
+--
+-- Class SportVenueHasSportCategory as table sport_venue_has_sport_category
+--
+
+CREATE TABLE "sport_venue_has_sport_category" (
+  "id" serial,
+  "sportVenueId" integer NOT NULL,
+  "sportCategoryId" integer NOT NULL
+);
+
+ALTER TABLE ONLY "sport_venue_has_sport_category"
+  ADD CONSTRAINT sport_venue_has_sport_category_pkey PRIMARY KEY (id);
+
+
