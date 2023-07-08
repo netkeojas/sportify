@@ -1,0 +1,14 @@
+class: SportVenue
+table: sport_venue
+fields:
+  name: String
+  address: String
+  locationUrl: String
+  openTiming: String
+  aboutVenue: String
+  gstNumber: String
+  socialMediaIds: List<String>
+  contactPerson: String
+  contactNumber: String
+  imageUrl: List<String>
+  aminities: List<int>

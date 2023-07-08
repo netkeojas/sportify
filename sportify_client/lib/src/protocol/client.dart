@@ -9,8 +9,9 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:sportify_client/src/protocol/sport_category.dart' as _i3;
-import 'dart:io' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:sportify_client/src/protocol/sport_venue.dart' as _i4;
+import 'dart:io' as _i5;
+import 'protocol.dart' as _i6;
 
 class _EndpointExample extends _i1.EndpointRef {
   _EndpointExample(_i1.EndpointCaller caller) : super(caller);
@@ -75,29 +76,81 @@ class _EndpointSportCategory extends _i1.EndpointRef {
       );
 }
 
+class _EndpointSportVenue extends _i1.EndpointRef {
+  _EndpointSportVenue(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'sportVenue';
+
+  _i2.Future<List<_i4.SportVenue>> getAllSportVenues() =>
+      caller.callServerEndpoint<List<_i4.SportVenue>>(
+        'sportVenue',
+        'getAllSportVenues',
+        {},
+      );
+
+  _i2.Future<_i4.SportVenue?> getSportVenueById(int id) =>
+      caller.callServerEndpoint<_i4.SportVenue?>(
+        'sportVenue',
+        'getSportVenueById',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i4.SportVenue>> getSportVenuesByName({String? keyword}) =>
+      caller.callServerEndpoint<List<_i4.SportVenue>>(
+        'sportVenue',
+        'getSportVenuesByName',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<bool> addSportVenue(_i4.SportVenue sportVenue) =>
+      caller.callServerEndpoint<bool>(
+        'sportVenue',
+        'addSportVenue',
+        {'sportVenue': sportVenue},
+      );
+
+  _i2.Future<bool> updateSportVenue(_i4.SportVenue sportVenue) =>
+      caller.callServerEndpoint<bool>(
+        'sportVenue',
+        'updateSportVenue',
+        {'sportVenue': sportVenue},
+      );
+
+  _i2.Future<bool> deleteSportVenue(int id) => caller.callServerEndpoint<bool>(
+        'sportVenue',
+        'deleteSportVenue',
+        {'id': id},
+      );
+}
+
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i4.SecurityContext? context,
+    _i5.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i6.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
     example = _EndpointExample(this);
     sportCategory = _EndpointSportCategory(this);
+    sportVenue = _EndpointSportVenue(this);
   }
 
   late final _EndpointExample example;
 
   late final _EndpointSportCategory sportCategory;
 
+  late final _EndpointSportVenue sportVenue;
+
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'example': example,
         'sportCategory': sportCategory,
+        'sportVenue': sportVenue,
       };
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
