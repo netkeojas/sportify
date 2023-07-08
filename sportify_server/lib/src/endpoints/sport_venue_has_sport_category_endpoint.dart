@@ -6,10 +6,12 @@ class SportVenueHasSportCategoryEndpoint extends Endpoint {
   Fetches all the sports venue facilities present in the database
    @param session - default
    @return List of type SportVenueHasSportCategory => [{
+    id: 001,
     venueId: 1,
     sportCategoryId: 3
     }, 
-   { venueId: 2,
+   { id: 002,
+   venueId: 2,
     sportCategoryId: 3 }, {venueId: 2,
     sportCategoryId: 5}]
   */
@@ -22,12 +24,15 @@ class SportVenueHasSportCategoryEndpoint extends Endpoint {
 Fetches all the sports venue facilities present in the database for given venueId
    @param session - default
    @return List of type SportVenueHasSportCategory => [{
+    id: 001,
     venueId: 1,
     sportCategoryId: 3
     }, 
-   { venueId: 1,
+   {id: 002, 
+    venueId: 1,
     sportCategoryId: 2 }, 
-    {venueId: 1,
+    {id: 003,
+    venueId: 1,
     sportCategoryId: 5}]
 */
   Future<List<SportVenueHasSportCategory>>

@@ -13,8 +13,9 @@ import 'package:sportify_client/src/protocol/sport_category.dart' as _i4;
 import 'package:sportify_client/src/protocol/sport_venue.dart' as _i5;
 import 'package:sportify_client/src/protocol/sport_venue_has_sport_category.dart'
     as _i6;
-import 'dart:io' as _i7;
-import 'protocol.dart' as _i8;
+import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i7;
+import 'dart:io' as _i8;
+import 'protocol.dart' as _i9;
 
 class _EndpointExample extends _i1.EndpointRef {
   _EndpointExample(_i1.EndpointCaller caller) : super(caller);
@@ -215,14 +216,37 @@ class _EndpointSportVenueHasSportCategory extends _i1.EndpointRef {
       );
 }
 
+class _EndpointVenueSportHasArea extends _i1.EndpointRef {
+  _EndpointVenueSportHasArea(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'venueSportHasArea';
+
+  _i2.Future<List<_i7.VenueSportHasArea>> getVenueSportHasAreaByVenueSportId(
+          {int? venueSportId}) =>
+      caller.callServerEndpoint<List<_i7.VenueSportHasArea>>(
+        'venueSportHasArea',
+        'getVenueSportHasAreaByVenueSportId',
+        {'venueSportId': venueSportId},
+      );
+
+  _i2.Future<bool> addVenueSportHasArea(
+          _i7.VenueSportHasArea venueSportHasArea) =>
+      caller.callServerEndpoint<bool>(
+        'venueSportHasArea',
+        'addVenueSportHasArea',
+        {'venueSportHasArea': venueSportHasArea},
+      );
+}
+
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i7.SecurityContext? context,
+    _i8.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i8.Protocol(),
+          _i9.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -231,6 +255,7 @@ class Client extends _i1.ServerpodClient {
     sportCategory = _EndpointSportCategory(this);
     sportVenue = _EndpointSportVenue(this);
     sportVenueHasSportCategory = _EndpointSportVenueHasSportCategory(this);
+    venueSportHasArea = _EndpointVenueSportHasArea(this);
   }
 
   late final _EndpointExample example;
@@ -243,6 +268,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointSportVenueHasSportCategory sportVenueHasSportCategory;
 
+  late final _EndpointVenueSportHasArea venueSportHasArea;
+
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'example': example,
@@ -250,6 +277,7 @@ class Client extends _i1.ServerpodClient {
         'sportCategory': sportCategory,
         'sportVenue': sportVenue,
         'sportVenueHasSportCategory': sportVenueHasSportCategory,
+        'venueSportHasArea': venueSportHasArea,
       };
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
