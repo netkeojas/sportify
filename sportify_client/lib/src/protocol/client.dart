@@ -8,14 +8,44 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:sportify_client/src/protocol/player.dart' as _i3;
-import 'package:sportify_client/src/protocol/sport_category.dart' as _i4;
-import 'package:sportify_client/src/protocol/sport_venue.dart' as _i5;
+import 'package:sportify_client/src/protocol/days_of_week.dart' as _i3;
+import 'package:sportify_client/src/protocol/player.dart' as _i4;
+import 'package:sportify_client/src/protocol/sport_category.dart' as _i5;
+import 'package:sportify_client/src/protocol/sport_venue.dart' as _i6;
 import 'package:sportify_client/src/protocol/sport_venue_has_sport_category.dart'
-    as _i6;
-import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i7;
-import 'dart:io' as _i8;
-import 'protocol.dart' as _i9;
+    as _i7;
+import 'package:sportify_client/src/protocol/time_slots_of_day.dart' as _i8;
+import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i9;
+import 'dart:io' as _i10;
+import 'protocol.dart' as _i11;
+
+class _EndpointDayOfWeek extends _i1.EndpointRef {
+  _EndpointDayOfWeek(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'dayOfWeek';
+
+  _i2.Future<List<_i3.DaysOfWeek>> getAllDaysOfWeek() =>
+      caller.callServerEndpoint<List<_i3.DaysOfWeek>>(
+        'dayOfWeek',
+        'getAllDaysOfWeek',
+        {},
+      );
+
+  _i2.Future<bool> addDaysOfWeek(_i3.DaysOfWeek daysOfWeek) =>
+      caller.callServerEndpoint<bool>(
+        'dayOfWeek',
+        'addDaysOfWeek',
+        {'daysOfWeek': daysOfWeek},
+      );
+
+  _i2.Future<_i3.DaysOfWeek?> getDayOfWeekById(int id) =>
+      caller.callServerEndpoint<_i3.DaysOfWeek?>(
+        'dayOfWeek',
+        'getDayOfWeekById',
+        {'id': id},
+      );
+}
 
 class _EndpointExample extends _i1.EndpointRef {
   _EndpointExample(_i1.EndpointCaller caller) : super(caller);
@@ -36,15 +66,15 @@ class _EndpointPlayer extends _i1.EndpointRef {
   @override
   String get name => 'player';
 
-  _i2.Future<List<_i3.Player>> getAllPlayers() =>
-      caller.callServerEndpoint<List<_i3.Player>>(
+  _i2.Future<List<_i4.Player>> getAllPlayers() =>
+      caller.callServerEndpoint<List<_i4.Player>>(
         'player',
         'getAllPlayers',
         {},
       );
 
-  _i2.Future<_i3.Player?> getPlayerById(int id) =>
-      caller.callServerEndpoint<_i3.Player?>(
+  _i2.Future<_i4.Player?> getPlayerById(int id) =>
+      caller.callServerEndpoint<_i4.Player?>(
         'player',
         'getPlayerById',
         {'id': id},
@@ -55,7 +85,7 @@ class _EndpointPlayer extends _i1.EndpointRef {
  * @param player - Player object
  * @return bool value true of record added
  */
-  _i2.Future<bool> addPlayer(_i3.Player player) =>
+  _i2.Future<bool> addPlayer(_i4.Player player) =>
       caller.callServerEndpoint<bool>(
         'player',
         'addPlayer',
@@ -67,7 +97,7 @@ class _EndpointPlayer extends _i1.EndpointRef {
  * @param player - Player object
  * @return bool value true of record updated
  */
-  _i2.Future<bool> updatePlayer(_i3.Player player) =>
+  _i2.Future<bool> updatePlayer(_i4.Player player) =>
       caller.callServerEndpoint<bool>(
         'player',
         'updatePlayer',
@@ -92,36 +122,36 @@ class _EndpointSportCategory extends _i1.EndpointRef {
   @override
   String get name => 'sportCategory';
 
-  _i2.Future<List<_i4.SportCategory>> getAllSportCategories() =>
-      caller.callServerEndpoint<List<_i4.SportCategory>>(
+  _i2.Future<List<_i5.SportCategory>> getAllSportCategories() =>
+      caller.callServerEndpoint<List<_i5.SportCategory>>(
         'sportCategory',
         'getAllSportCategories',
         {},
       );
 
-  _i2.Future<_i4.SportCategory?> getSportCategoryById(int id) =>
-      caller.callServerEndpoint<_i4.SportCategory?>(
+  _i2.Future<_i5.SportCategory?> getSportCategoryById(int id) =>
+      caller.callServerEndpoint<_i5.SportCategory?>(
         'sportCategory',
         'getSportCategoryById',
         {'id': id},
       );
 
-  _i2.Future<List<_i4.SportCategory>> getSportsCategoryByName(
+  _i2.Future<List<_i5.SportCategory>> getSportsCategoryByName(
           {String? keyword}) =>
-      caller.callServerEndpoint<List<_i4.SportCategory>>(
+      caller.callServerEndpoint<List<_i5.SportCategory>>(
         'sportCategory',
         'getSportsCategoryByName',
         {'keyword': keyword},
       );
 
-  _i2.Future<bool> addSportsCategory(_i4.SportCategory sportCategory) =>
+  _i2.Future<bool> addSportsCategory(_i5.SportCategory sportCategory) =>
       caller.callServerEndpoint<bool>(
         'sportCategory',
         'addSportsCategory',
         {'sportCategory': sportCategory},
       );
 
-  _i2.Future<bool> updateSportCategory(_i4.SportCategory sportCategory) =>
+  _i2.Future<bool> updateSportCategory(_i5.SportCategory sportCategory) =>
       caller.callServerEndpoint<bool>(
         'sportCategory',
         'updateSportCategory',
@@ -142,35 +172,35 @@ class _EndpointSportVenue extends _i1.EndpointRef {
   @override
   String get name => 'sportVenue';
 
-  _i2.Future<List<_i5.SportVenue>> getAllSportVenues() =>
-      caller.callServerEndpoint<List<_i5.SportVenue>>(
+  _i2.Future<List<_i6.SportVenue>> getAllSportVenues() =>
+      caller.callServerEndpoint<List<_i6.SportVenue>>(
         'sportVenue',
         'getAllSportVenues',
         {},
       );
 
-  _i2.Future<_i5.SportVenue?> getSportVenueById(int id) =>
-      caller.callServerEndpoint<_i5.SportVenue?>(
+  _i2.Future<_i6.SportVenue?> getSportVenueById(int id) =>
+      caller.callServerEndpoint<_i6.SportVenue?>(
         'sportVenue',
         'getSportVenueById',
         {'id': id},
       );
 
-  _i2.Future<List<_i5.SportVenue>> getSportVenuesByName({String? keyword}) =>
-      caller.callServerEndpoint<List<_i5.SportVenue>>(
+  _i2.Future<List<_i6.SportVenue>> getSportVenuesByName({String? keyword}) =>
+      caller.callServerEndpoint<List<_i6.SportVenue>>(
         'sportVenue',
         'getSportVenuesByName',
         {'keyword': keyword},
       );
 
-  _i2.Future<bool> addSportVenue(_i5.SportVenue sportVenue) =>
+  _i2.Future<bool> addSportVenue(_i6.SportVenue sportVenue) =>
       caller.callServerEndpoint<bool>(
         'sportVenue',
         'addSportVenue',
         {'sportVenue': sportVenue},
       );
 
-  _i2.Future<bool> updateSportVenue(_i5.SportVenue sportVenue) =>
+  _i2.Future<bool> updateSportVenue(_i6.SportVenue sportVenue) =>
       caller.callServerEndpoint<bool>(
         'sportVenue',
         'updateSportVenue',
@@ -191,28 +221,56 @@ class _EndpointSportVenueHasSportCategory extends _i1.EndpointRef {
   @override
   String get name => 'sportVenueHasSportCategory';
 
-  _i2.Future<List<_i6.SportVenueHasSportCategory>>
+  _i2.Future<List<_i7.SportVenueHasSportCategory>>
       getAllSportVenueHasSportCategory() =>
-          caller.callServerEndpoint<List<_i6.SportVenueHasSportCategory>>(
+          caller.callServerEndpoint<List<_i7.SportVenueHasSportCategory>>(
             'sportVenueHasSportCategory',
             'getAllSportVenueHasSportCategory',
             {},
           );
 
-  _i2.Future<List<_i6.SportVenueHasSportCategory>>
+  _i2.Future<List<_i7.SportVenueHasSportCategory>>
       getSportVenueHasSportCategoryByVenueId({int? venueId}) =>
-          caller.callServerEndpoint<List<_i6.SportVenueHasSportCategory>>(
+          caller.callServerEndpoint<List<_i7.SportVenueHasSportCategory>>(
             'sportVenueHasSportCategory',
             'getSportVenueHasSportCategoryByVenueId',
             {'venueId': venueId},
           );
 
   _i2.Future<bool> addSportVenueHasSportCategory(
-          _i6.SportVenueHasSportCategory sportVenueHasSportCategory) =>
+          _i7.SportVenueHasSportCategory sportVenueHasSportCategory) =>
       caller.callServerEndpoint<bool>(
         'sportVenueHasSportCategory',
         'addSportVenueHasSportCategory',
         {'sportVenueHasSportCategory': sportVenueHasSportCategory},
+      );
+}
+
+class _EndpointTimeSlotOfDay extends _i1.EndpointRef {
+  _EndpointTimeSlotOfDay(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'timeSlotOfDay';
+
+  _i2.Future<List<_i8.TimeSlotsOfDay>> getAllTimeSlotsOfDay() =>
+      caller.callServerEndpoint<List<_i8.TimeSlotsOfDay>>(
+        'timeSlotOfDay',
+        'getAllTimeSlotsOfDay',
+        {},
+      );
+
+  _i2.Future<bool> addTimeSlotOfDay(_i8.TimeSlotsOfDay timeSlotsOfDay) =>
+      caller.callServerEndpoint<bool>(
+        'timeSlotOfDay',
+        'addTimeSlotOfDay',
+        {'timeSlotsOfDay': timeSlotsOfDay},
+      );
+
+  _i2.Future<_i8.TimeSlotsOfDay?> getTimeSlotOfDayById(int id) =>
+      caller.callServerEndpoint<_i8.TimeSlotsOfDay?>(
+        'timeSlotOfDay',
+        'getTimeSlotOfDayById',
+        {'id': id},
       );
 }
 
@@ -222,16 +280,16 @@ class _EndpointVenueSportHasArea extends _i1.EndpointRef {
   @override
   String get name => 'venueSportHasArea';
 
-  _i2.Future<List<_i7.VenueSportHasArea>> getVenueSportHasAreaByVenueSportId(
+  _i2.Future<List<_i9.VenueSportHasArea>> getVenueSportHasAreaByVenueSportId(
           {int? venueSportId}) =>
-      caller.callServerEndpoint<List<_i7.VenueSportHasArea>>(
+      caller.callServerEndpoint<List<_i9.VenueSportHasArea>>(
         'venueSportHasArea',
         'getVenueSportHasAreaByVenueSportId',
         {'venueSportId': venueSportId},
       );
 
   _i2.Future<bool> addVenueSportHasArea(
-          _i7.VenueSportHasArea venueSportHasArea) =>
+          _i9.VenueSportHasArea venueSportHasArea) =>
       caller.callServerEndpoint<bool>(
         'venueSportHasArea',
         'addVenueSportHasArea',
@@ -242,21 +300,25 @@ class _EndpointVenueSportHasArea extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i8.SecurityContext? context,
+    _i10.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i9.Protocol(),
+          _i11.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
+    dayOfWeek = _EndpointDayOfWeek(this);
     example = _EndpointExample(this);
     player = _EndpointPlayer(this);
     sportCategory = _EndpointSportCategory(this);
     sportVenue = _EndpointSportVenue(this);
     sportVenueHasSportCategory = _EndpointSportVenueHasSportCategory(this);
+    timeSlotOfDay = _EndpointTimeSlotOfDay(this);
     venueSportHasArea = _EndpointVenueSportHasArea(this);
   }
+
+  late final _EndpointDayOfWeek dayOfWeek;
 
   late final _EndpointExample example;
 
@@ -268,15 +330,19 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointSportVenueHasSportCategory sportVenueHasSportCategory;
 
+  late final _EndpointTimeSlotOfDay timeSlotOfDay;
+
   late final _EndpointVenueSportHasArea venueSportHasArea;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'dayOfWeek': dayOfWeek,
         'example': example,
         'player': player,
         'sportCategory': sportCategory,
         'sportVenue': sportVenue,
         'sportVenueHasSportCategory': sportVenueHasSportCategory,
+        'timeSlotOfDay': timeSlotOfDay,
         'venueSportHasArea': venueSportHasArea,
       };
   @override

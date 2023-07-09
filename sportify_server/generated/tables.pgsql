@@ -1,4 +1,18 @@
 --
+-- Class DaysOfWeek as table days_of_week
+--
+
+CREATE TABLE "days_of_week" (
+  "id" serial,
+  "name" text NOT NULL,
+  "code" text NOT NULL
+);
+
+ALTER TABLE ONLY "days_of_week"
+  ADD CONSTRAINT days_of_week_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Player as table player
 --
 
@@ -67,6 +81,21 @@ CREATE TABLE "sport_venue_has_sport_category" (
 
 ALTER TABLE ONLY "sport_venue_has_sport_category"
   ADD CONSTRAINT sport_venue_has_sport_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Class TimeSlotsOfDay as table time_slots_of_day
+--
+
+CREATE TABLE "time_slots_of_day" (
+  "id" serial,
+  "code" text NOT NULL,
+  "fromTime" text NOT NULL,
+  "toTime" text NOT NULL
+);
+
+ALTER TABLE ONLY "time_slots_of_day"
+  ADD CONSTRAINT time_slots_of_day_pkey PRIMARY KEY (id);
 
 
 --

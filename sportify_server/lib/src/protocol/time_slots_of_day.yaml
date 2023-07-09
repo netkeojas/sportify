@@ -1,0 +1,6 @@
+class: TimeSlotsOfDay
+table: time_slots_of_day
+fields:
+  code: String
+  fromTime: String
+  toTime: String

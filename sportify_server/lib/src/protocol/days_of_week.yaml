@@ -1,0 +1,5 @@
+class: DaysOfWeek
+table: days_of_week
+fields:
+  name: String
+  code: String
