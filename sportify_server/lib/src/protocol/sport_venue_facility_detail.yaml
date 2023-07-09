@@ -1,0 +1,8 @@
+class: SportVenueFacilityDetail
+table: sport_venue_facility_detail
+fields:
+  venueHasSportAreaId: int
+  dayOfWeekIds: List<int>
+  timeSlotForDayIds: List<int>
+  pricePerHour: double
+  pricePerPerson: double
