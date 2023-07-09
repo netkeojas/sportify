@@ -12,12 +12,14 @@ import 'package:sportify_client/src/protocol/days_of_week.dart' as _i3;
 import 'package:sportify_client/src/protocol/player.dart' as _i4;
 import 'package:sportify_client/src/protocol/sport_category.dart' as _i5;
 import 'package:sportify_client/src/protocol/sport_venue.dart' as _i6;
-import 'package:sportify_client/src/protocol/sport_venue_has_sport_category.dart'
+import 'package:sportify_client/src/protocol/sport_venue_facility_detail.dart'
     as _i7;
-import 'package:sportify_client/src/protocol/time_slots_of_day.dart' as _i8;
-import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i9;
-import 'dart:io' as _i10;
-import 'protocol.dart' as _i11;
+import 'package:sportify_client/src/protocol/sport_venue_has_sport_category.dart'
+    as _i8;
+import 'package:sportify_client/src/protocol/time_slots_of_day.dart' as _i9;
+import 'package:sportify_client/src/protocol/venue_sport_has_area.dart' as _i10;
+import 'dart:io' as _i11;
+import 'protocol.dart' as _i12;
 
 class _EndpointDayOfWeek extends _i1.EndpointRef {
   _EndpointDayOfWeek(_i1.EndpointCaller caller) : super(caller);
@@ -214,6 +216,37 @@ class _EndpointSportVenue extends _i1.EndpointRef {
       );
 }
 
+class _EndpointSportVenueFacilityDetail extends _i1.EndpointRef {
+  _EndpointSportVenueFacilityDetail(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'sportVenueFacilityDetail';
+
+  _i2.Future<bool> addSportVenueFacilityDetail(
+          _i7.SportVenueFacilityDetail sportVenueFacilityDetail) =>
+      caller.callServerEndpoint<bool>(
+        'sportVenueFacilityDetail',
+        'addSportVenueFacilityDetail',
+        {'sportVenueFacilityDetail': sportVenueFacilityDetail},
+      );
+
+  _i2.Future<List<_i7.SportVenueFacilityDetail>>
+      getAllSportVenueFacilityDetails() =>
+          caller.callServerEndpoint<List<_i7.SportVenueFacilityDetail>>(
+            'sportVenueFacilityDetail',
+            'getAllSportVenueFacilityDetails',
+            {},
+          );
+
+  _i2.Future<List<_i7.SportVenueFacilityDetail>>
+      getAllSportVenueFacilityDetailsForGivenVenueHasAreaId({int? keyword}) =>
+          caller.callServerEndpoint<List<_i7.SportVenueFacilityDetail>>(
+            'sportVenueFacilityDetail',
+            'getAllSportVenueFacilityDetailsForGivenVenueHasAreaId',
+            {'keyword': keyword},
+          );
+}
+
 class _EndpointSportVenueHasSportCategory extends _i1.EndpointRef {
   _EndpointSportVenueHasSportCategory(_i1.EndpointCaller caller)
       : super(caller);
@@ -221,24 +254,24 @@ class _EndpointSportVenueHasSportCategory extends _i1.EndpointRef {
   @override
   String get name => 'sportVenueHasSportCategory';
 
-  _i2.Future<List<_i7.SportVenueHasSportCategory>>
+  _i2.Future<List<_i8.SportVenueHasSportCategory>>
       getAllSportVenueHasSportCategory() =>
-          caller.callServerEndpoint<List<_i7.SportVenueHasSportCategory>>(
+          caller.callServerEndpoint<List<_i8.SportVenueHasSportCategory>>(
             'sportVenueHasSportCategory',
             'getAllSportVenueHasSportCategory',
             {},
           );
 
-  _i2.Future<List<_i7.SportVenueHasSportCategory>>
+  _i2.Future<List<_i8.SportVenueHasSportCategory>>
       getSportVenueHasSportCategoryByVenueId({int? venueId}) =>
-          caller.callServerEndpoint<List<_i7.SportVenueHasSportCategory>>(
+          caller.callServerEndpoint<List<_i8.SportVenueHasSportCategory>>(
             'sportVenueHasSportCategory',
             'getSportVenueHasSportCategoryByVenueId',
             {'venueId': venueId},
           );
 
   _i2.Future<bool> addSportVenueHasSportCategory(
-          _i7.SportVenueHasSportCategory sportVenueHasSportCategory) =>
+          _i8.SportVenueHasSportCategory sportVenueHasSportCategory) =>
       caller.callServerEndpoint<bool>(
         'sportVenueHasSportCategory',
         'addSportVenueHasSportCategory',
@@ -252,22 +285,22 @@ class _EndpointTimeSlotOfDay extends _i1.EndpointRef {
   @override
   String get name => 'timeSlotOfDay';
 
-  _i2.Future<List<_i8.TimeSlotsOfDay>> getAllTimeSlotsOfDay() =>
-      caller.callServerEndpoint<List<_i8.TimeSlotsOfDay>>(
+  _i2.Future<List<_i9.TimeSlotsOfDay>> getAllTimeSlotsOfDay() =>
+      caller.callServerEndpoint<List<_i9.TimeSlotsOfDay>>(
         'timeSlotOfDay',
         'getAllTimeSlotsOfDay',
         {},
       );
 
-  _i2.Future<bool> addTimeSlotOfDay(_i8.TimeSlotsOfDay timeSlotsOfDay) =>
+  _i2.Future<bool> addTimeSlotOfDay(_i9.TimeSlotsOfDay timeSlotsOfDay) =>
       caller.callServerEndpoint<bool>(
         'timeSlotOfDay',
         'addTimeSlotOfDay',
         {'timeSlotsOfDay': timeSlotsOfDay},
       );
 
-  _i2.Future<_i8.TimeSlotsOfDay?> getTimeSlotOfDayById(int id) =>
-      caller.callServerEndpoint<_i8.TimeSlotsOfDay?>(
+  _i2.Future<_i9.TimeSlotsOfDay?> getTimeSlotOfDayById(int id) =>
+      caller.callServerEndpoint<_i9.TimeSlotsOfDay?>(
         'timeSlotOfDay',
         'getTimeSlotOfDayById',
         {'id': id},
@@ -280,16 +313,16 @@ class _EndpointVenueSportHasArea extends _i1.EndpointRef {
   @override
   String get name => 'venueSportHasArea';
 
-  _i2.Future<List<_i9.VenueSportHasArea>> getVenueSportHasAreaByVenueSportId(
+  _i2.Future<List<_i10.VenueSportHasArea>> getVenueSportHasAreaByVenueSportId(
           {int? venueSportId}) =>
-      caller.callServerEndpoint<List<_i9.VenueSportHasArea>>(
+      caller.callServerEndpoint<List<_i10.VenueSportHasArea>>(
         'venueSportHasArea',
         'getVenueSportHasAreaByVenueSportId',
         {'venueSportId': venueSportId},
       );
 
   _i2.Future<bool> addVenueSportHasArea(
-          _i9.VenueSportHasArea venueSportHasArea) =>
+          _i10.VenueSportHasArea venueSportHasArea) =>
       caller.callServerEndpoint<bool>(
         'venueSportHasArea',
         'addVenueSportHasArea',
@@ -300,11 +333,11 @@ class _EndpointVenueSportHasArea extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i10.SecurityContext? context,
+    _i11.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i11.Protocol(),
+          _i12.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -313,6 +346,7 @@ class Client extends _i1.ServerpodClient {
     player = _EndpointPlayer(this);
     sportCategory = _EndpointSportCategory(this);
     sportVenue = _EndpointSportVenue(this);
+    sportVenueFacilityDetail = _EndpointSportVenueFacilityDetail(this);
     sportVenueHasSportCategory = _EndpointSportVenueHasSportCategory(this);
     timeSlotOfDay = _EndpointTimeSlotOfDay(this);
     venueSportHasArea = _EndpointVenueSportHasArea(this);
@@ -328,6 +362,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointSportVenue sportVenue;
 
+  late final _EndpointSportVenueFacilityDetail sportVenueFacilityDetail;
+
   late final _EndpointSportVenueHasSportCategory sportVenueHasSportCategory;
 
   late final _EndpointTimeSlotOfDay timeSlotOfDay;
@@ -341,6 +377,7 @@ class Client extends _i1.ServerpodClient {
         'player': player,
         'sportCategory': sportCategory,
         'sportVenue': sportVenue,
+        'sportVenueFacilityDetail': sportVenueFacilityDetail,
         'sportVenueHasSportCategory': sportVenueHasSportCategory,
         'timeSlotOfDay': timeSlotOfDay,
         'venueSportHasArea': venueSportHasArea,
