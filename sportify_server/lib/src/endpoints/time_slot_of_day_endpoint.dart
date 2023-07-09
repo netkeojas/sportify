@@ -1,7 +1,7 @@
 import 'package:serverpod/serverpod.dart';
 import '../generated/protocol.dart';
 
-/*
+/* Object structure
   {
     id: int
     code: String
