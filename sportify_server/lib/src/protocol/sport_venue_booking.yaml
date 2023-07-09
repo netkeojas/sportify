@@ -1,0 +1,11 @@
+class: SportVenueBooking
+table: sport_venue_booking
+fields:
+  playerId: int
+  venueSportHasAreaId: List<int>
+  dateOfBooking: DateTime
+  dayOfWeekId: int
+  timeSlotOfDayId: List<int>
+  totalAmount: double
+  amountPaid: double
+  bookingStatus: String

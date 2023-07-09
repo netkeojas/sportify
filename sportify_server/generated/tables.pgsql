@@ -70,6 +70,26 @@ ALTER TABLE ONLY "sport_venue"
 
 
 --
+-- Class SportVenueBooking as table sport_venue_booking
+--
+
+CREATE TABLE "sport_venue_booking" (
+  "id" serial,
+  "playerId" integer NOT NULL,
+  "venueSportHasAreaId" json NOT NULL,
+  "dateOfBooking" timestamp without time zone NOT NULL,
+  "dayOfWeekId" integer NOT NULL,
+  "timeSlotOfDayId" json NOT NULL,
+  "totalAmount" double precision NOT NULL,
+  "amountPaid" double precision NOT NULL,
+  "bookingStatus" text NOT NULL
+);
+
+ALTER TABLE ONLY "sport_venue_booking"
+  ADD CONSTRAINT sport_venue_booking_pkey PRIMARY KEY (id);
+
+
+--
 -- Class SportVenueFacilityDetail as table sport_venue_facility_detail
 --
 
