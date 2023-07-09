@@ -14,26 +14,29 @@ import 'example.dart' as _i4;
 import 'player.dart' as _i5;
 import 'sport_category.dart' as _i6;
 import 'sport_venue.dart' as _i7;
-import 'sport_venue_facility_detail.dart' as _i8;
-import 'sport_venue_has_sport_category.dart' as _i9;
-import 'time_slots_of_day.dart' as _i10;
-import 'venue_sport_has_area.dart' as _i11;
-import 'package:sportify_server/src/generated/days_of_week.dart' as _i12;
-import 'package:sportify_server/src/generated/player.dart' as _i13;
-import 'package:sportify_server/src/generated/sport_category.dart' as _i14;
-import 'package:sportify_server/src/generated/sport_venue.dart' as _i15;
+import 'sport_venue_booking.dart' as _i8;
+import 'sport_venue_facility_detail.dart' as _i9;
+import 'sport_venue_has_sport_category.dart' as _i10;
+import 'time_slots_of_day.dart' as _i11;
+import 'venue_sport_has_area.dart' as _i12;
+import 'package:sportify_server/src/generated/days_of_week.dart' as _i13;
+import 'package:sportify_server/src/generated/player.dart' as _i14;
+import 'package:sportify_server/src/generated/sport_category.dart' as _i15;
+import 'package:sportify_server/src/generated/sport_venue_booking.dart' as _i16;
+import 'package:sportify_server/src/generated/sport_venue.dart' as _i17;
 import 'package:sportify_server/src/generated/sport_venue_facility_detail.dart'
-    as _i16;
+    as _i18;
 import 'package:sportify_server/src/generated/sport_venue_has_sport_category.dart'
-    as _i17;
-import 'package:sportify_server/src/generated/time_slots_of_day.dart' as _i18;
-import 'package:sportify_server/src/generated/venue_sport_has_area.dart'
     as _i19;
+import 'package:sportify_server/src/generated/time_slots_of_day.dart' as _i20;
+import 'package:sportify_server/src/generated/venue_sport_has_area.dart'
+    as _i21;
 export 'days_of_week.dart';
 export 'example.dart';
 export 'player.dart';
 export 'sport_category.dart';
 export 'sport_venue.dart';
+export 'sport_venue_booking.dart';
 export 'sport_venue_facility_detail.dart';
 export 'sport_venue_has_sport_category.dart';
 export 'time_slots_of_day.dart';
@@ -308,6 +311,84 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
+      name: 'sport_venue_booking',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'sport_venue_booking_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'playerId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'venueSportHasAreaId',
+          columnType: _i2.ColumnType.json,
+          isNullable: false,
+          dartType: 'List<int>',
+        ),
+        _i2.ColumnDefinition(
+          name: 'dateOfBooking',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+        _i2.ColumnDefinition(
+          name: 'dayOfWeekId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'timeSlotOfDayId',
+          columnType: _i2.ColumnType.json,
+          isNullable: false,
+          dartType: 'List<int>',
+        ),
+        _i2.ColumnDefinition(
+          name: 'totalAmount',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'amountPaid',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'bookingStatus',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'sport_venue_booking_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
       name: 'sport_venue_facility_detail',
       schema: 'public',
       columns: [
@@ -528,17 +609,20 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i7.SportVenue) {
       return _i7.SportVenue.fromJson(data, this) as T;
     }
-    if (t == _i8.SportVenueFacilityDetail) {
-      return _i8.SportVenueFacilityDetail.fromJson(data, this) as T;
+    if (t == _i8.SportVenueBooking) {
+      return _i8.SportVenueBooking.fromJson(data, this) as T;
     }
-    if (t == _i9.SportVenueHasSportCategory) {
-      return _i9.SportVenueHasSportCategory.fromJson(data, this) as T;
+    if (t == _i9.SportVenueFacilityDetail) {
+      return _i9.SportVenueFacilityDetail.fromJson(data, this) as T;
     }
-    if (t == _i10.TimeSlotsOfDay) {
-      return _i10.TimeSlotsOfDay.fromJson(data, this) as T;
+    if (t == _i10.SportVenueHasSportCategory) {
+      return _i10.SportVenueHasSportCategory.fromJson(data, this) as T;
     }
-    if (t == _i11.VenueSportHasArea) {
-      return _i11.VenueSportHasArea.fromJson(data, this) as T;
+    if (t == _i11.TimeSlotsOfDay) {
+      return _i11.TimeSlotsOfDay.fromJson(data, this) as T;
+    }
+    if (t == _i12.VenueSportHasArea) {
+      return _i12.VenueSportHasArea.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i3.DaysOfWeek?>()) {
       return (data != null ? _i3.DaysOfWeek.fromJson(data, this) : null) as T;
@@ -556,22 +640,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i7.SportVenue?>()) {
       return (data != null ? _i7.SportVenue.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i8.SportVenueFacilityDetail?>()) {
-      return (data != null
-          ? _i8.SportVenueFacilityDetail.fromJson(data, this)
-          : null) as T;
-    }
-    if (t == _i1.getType<_i9.SportVenueHasSportCategory?>()) {
-      return (data != null
-          ? _i9.SportVenueHasSportCategory.fromJson(data, this)
-          : null) as T;
-    }
-    if (t == _i1.getType<_i10.TimeSlotsOfDay?>()) {
-      return (data != null ? _i10.TimeSlotsOfDay.fromJson(data, this) : null)
+    if (t == _i1.getType<_i8.SportVenueBooking?>()) {
+      return (data != null ? _i8.SportVenueBooking.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i11.VenueSportHasArea?>()) {
-      return (data != null ? _i11.VenueSportHasArea.fromJson(data, this) : null)
+    if (t == _i1.getType<_i9.SportVenueFacilityDetail?>()) {
+      return (data != null
+          ? _i9.SportVenueFacilityDetail.fromJson(data, this)
+          : null) as T;
+    }
+    if (t == _i1.getType<_i10.SportVenueHasSportCategory?>()) {
+      return (data != null
+          ? _i10.SportVenueHasSportCategory.fromJson(data, this)
+          : null) as T;
+    }
+    if (t == _i1.getType<_i11.TimeSlotsOfDay?>()) {
+      return (data != null ? _i11.TimeSlotsOfDay.fromJson(data, this) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i12.VenueSportHasArea?>()) {
+      return (data != null ? _i12.VenueSportHasArea.fromJson(data, this) : null)
           as T;
     }
     if (t == List<String>) {
@@ -581,41 +669,46 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
     }
-    if (t == List<_i12.DaysOfWeek>) {
-      return (data as List).map((e) => deserialize<_i12.DaysOfWeek>(e)).toList()
+    if (t == List<_i13.DaysOfWeek>) {
+      return (data as List).map((e) => deserialize<_i13.DaysOfWeek>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.Player>) {
-      return (data as List).map((e) => deserialize<_i13.Player>(e)).toList()
+    if (t == List<_i14.Player>) {
+      return (data as List).map((e) => deserialize<_i14.Player>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.SportCategory>) {
+    if (t == List<_i15.SportCategory>) {
       return (data as List)
-          .map((e) => deserialize<_i14.SportCategory>(e))
+          .map((e) => deserialize<_i15.SportCategory>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i15.SportVenue>) {
-      return (data as List).map((e) => deserialize<_i15.SportVenue>(e)).toList()
+    if (t == List<_i16.SportVenueBooking>) {
+      return (data as List)
+          .map((e) => deserialize<_i16.SportVenueBooking>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i17.SportVenue>) {
+      return (data as List).map((e) => deserialize<_i17.SportVenue>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i16.SportVenueFacilityDetail>) {
+    if (t == List<_i18.SportVenueFacilityDetail>) {
       return (data as List)
-          .map((e) => deserialize<_i16.SportVenueFacilityDetail>(e))
+          .map((e) => deserialize<_i18.SportVenueFacilityDetail>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i17.SportVenueHasSportCategory>) {
+    if (t == List<_i19.SportVenueHasSportCategory>) {
       return (data as List)
-          .map((e) => deserialize<_i17.SportVenueHasSportCategory>(e))
+          .map((e) => deserialize<_i19.SportVenueHasSportCategory>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i18.TimeSlotsOfDay>) {
+    if (t == List<_i20.TimeSlotsOfDay>) {
       return (data as List)
-          .map((e) => deserialize<_i18.TimeSlotsOfDay>(e))
+          .map((e) => deserialize<_i20.TimeSlotsOfDay>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i19.VenueSportHasArea>) {
+    if (t == List<_i21.VenueSportHasArea>) {
       return (data as List)
-          .map((e) => deserialize<_i19.VenueSportHasArea>(e))
+          .map((e) => deserialize<_i21.VenueSportHasArea>(e))
           .toList() as dynamic;
     }
     try {
@@ -641,16 +734,19 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i7.SportVenue) {
       return 'SportVenue';
     }
-    if (data is _i8.SportVenueFacilityDetail) {
+    if (data is _i8.SportVenueBooking) {
+      return 'SportVenueBooking';
+    }
+    if (data is _i9.SportVenueFacilityDetail) {
       return 'SportVenueFacilityDetail';
     }
-    if (data is _i9.SportVenueHasSportCategory) {
+    if (data is _i10.SportVenueHasSportCategory) {
       return 'SportVenueHasSportCategory';
     }
-    if (data is _i10.TimeSlotsOfDay) {
+    if (data is _i11.TimeSlotsOfDay) {
       return 'TimeSlotsOfDay';
     }
-    if (data is _i11.VenueSportHasArea) {
+    if (data is _i12.VenueSportHasArea) {
       return 'VenueSportHasArea';
     }
     return super.getClassNameForObject(data);
@@ -673,17 +769,20 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'SportVenue') {
       return deserialize<_i7.SportVenue>(data['data']);
     }
+    if (data['className'] == 'SportVenueBooking') {
+      return deserialize<_i8.SportVenueBooking>(data['data']);
+    }
     if (data['className'] == 'SportVenueFacilityDetail') {
-      return deserialize<_i8.SportVenueFacilityDetail>(data['data']);
+      return deserialize<_i9.SportVenueFacilityDetail>(data['data']);
     }
     if (data['className'] == 'SportVenueHasSportCategory') {
-      return deserialize<_i9.SportVenueHasSportCategory>(data['data']);
+      return deserialize<_i10.SportVenueHasSportCategory>(data['data']);
     }
     if (data['className'] == 'TimeSlotsOfDay') {
-      return deserialize<_i10.TimeSlotsOfDay>(data['data']);
+      return deserialize<_i11.TimeSlotsOfDay>(data['data']);
     }
     if (data['className'] == 'VenueSportHasArea') {
-      return deserialize<_i11.VenueSportHasArea>(data['data']);
+      return deserialize<_i12.VenueSportHasArea>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -705,14 +804,16 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i6.SportCategory.t;
       case _i7.SportVenue:
         return _i7.SportVenue.t;
-      case _i8.SportVenueFacilityDetail:
-        return _i8.SportVenueFacilityDetail.t;
-      case _i9.SportVenueHasSportCategory:
-        return _i9.SportVenueHasSportCategory.t;
-      case _i10.TimeSlotsOfDay:
-        return _i10.TimeSlotsOfDay.t;
-      case _i11.VenueSportHasArea:
-        return _i11.VenueSportHasArea.t;
+      case _i8.SportVenueBooking:
+        return _i8.SportVenueBooking.t;
+      case _i9.SportVenueFacilityDetail:
+        return _i9.SportVenueFacilityDetail.t;
+      case _i10.SportVenueHasSportCategory:
+        return _i10.SportVenueHasSportCategory.t;
+      case _i11.TimeSlotsOfDay:
+        return _i11.TimeSlotsOfDay.t;
+      case _i12.VenueSportHasArea:
+        return _i12.VenueSportHasArea.t;
     }
     return null;
   }
