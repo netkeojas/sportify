@@ -1,6 +1,10 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sportify_client/sportify_client.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import 'package:sportify_flutter/screen/main/main_screen.dart';
+import 'package:sportify_flutter/screen/onboarding_screen.dart';
+import 'package:sportify_flutter/theme.dart';
 
 // Sets up a singleton client object that can be used to talk to the server from
 // anywhere in our app. The client is generated from your server code.
@@ -10,21 +14,32 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
-void main() {
-  runApp(const MyApp());
+// void main() {
+//   runApp(const MyApp());
+// }
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final skipOnBoarding = prefs.getBool("skipOnBoarding") ?? false;
+  runApp(MyApp(skipOnBoarding: skipOnBoarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool skipOnBoarding;
+
+  const MyApp({Key? key, required this.skipOnBoarding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Serverpod Demo',
+      title: 'Spod',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Serverpod Example'),
+          primarySwatch: createMaterialColor(primaryColor500),
+          canvasColor: colorWhite),
+      // home: const MyHomePage(title: 'Serverpod Example'),
+      home: skipOnBoarding ? MainScreen(currentScreen: 0) : OnboardingScreen(),
     );
   }
 }
@@ -51,9 +66,18 @@ class MyHomePageState extends State<MyHomePage> {
   // is successful.
   void _callHello() async {
     try {
-      final result = await client.example.hello(_textEditingController.text);
+      // final result = await client.example.hello(_textEditingController.text);
+      var player = Player(
+          name: 'Hrishikesh',
+          emailId: "emailId",
+          contactNumber: "9822588599",
+          city: "kop",
+          gender: "male",
+          dateOfBirth: DateTime(1997, 2, 18, 0),
+          role: 'player');
+      final result = await client.player.addPlayer(player);
       setState(() {
-        _resultMessage = result;
+        _resultMessage = "Successfully added! ${player.name} King Maker";
       });
     } catch (e) {
       setState(() {
