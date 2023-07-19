@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sportify_client/sportify_client.dart';
+import 'package:sportify_flutter/main.dart';
 
 import '../model/sport_field.dart';
 import '../theme.dart';
@@ -10,6 +12,7 @@ import '../widget/sport_field_list.dart';
 class SearchScreen extends StatefulWidget {
   String selectedDropdownItem;
   List<SportField> fieldList = sportFieldList;
+  List<SportVenue>? sportVenueList;
 
   SearchScreen({required this.selectedDropdownItem});
 
@@ -21,7 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
   String _query = "";
   String _selectedDropdownItem = "All";
   List<SportField> _fieldList = [];
-  List<SportField> _selectedListByCategory = [];
+  List<SportVenue> _selectedListByCategory = [];
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -30,16 +33,25 @@ class _SearchScreenState extends State<SearchScreen> {
     _query = widget.selectedDropdownItem;
     _fieldList = widget.fieldList;
 
-    if (_query != "") {
-      _selectedDropdownItem = widget.selectedDropdownItem;
-      for (int i = 0; i < _fieldList.length; i++) {
-        if (_selectedDropdownItem == "All") {
-          _selectedListByCategory = _fieldList;
-        } else if (_fieldList[i].category.name == _selectedDropdownItem) {
-          _selectedListByCategory.add(_fieldList[i]);
-        }
-      }
-    }
+    // if (_query != "") {
+    //   _selectedDropdownItem = widget.selectedDropdownItem;
+    //   for (int i = 0; i < _fieldList.length; i++) {
+    //     if (_selectedDropdownItem == "All") {
+    //       _selectedListByCategory = _fieldList;
+    //     } else if (_fieldList[i].category.name == _selectedDropdownItem) {
+    //       _selectedListByCategory.add(_fieldList[i]);
+    //     }
+    //   }
+    // }
+    fetchSportVenues();
+  }
+
+  void fetchSportVenues() async {
+    var spVeneus = await client.sportVenue.getAllSportVenues();
+    // print(spVeneus);
+    setState(() {
+      _selectedListByCategory = spVeneus;
+    });
   }
 
   @override
@@ -69,7 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   icon: const Icon(CupertinoIcons.arrow_left),
                   color: colorWhite,
                 ),
-                showDropdown()
+                // showDropdown()
               ],
             ),
           ),
@@ -128,45 +140,45 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget showDropdown() {
-    return DropdownButton<String>(
-        value: _selectedDropdownItem,
-        iconEnabledColor: colorWhite,
-        iconDisabledColor: darkBlue500,
-        dropdownColor: darkBlue500,
-        style: normalTextStyle.copyWith(color: colorWhite),
-        icon: const Icon(Icons.filter_alt),
-        isDense: false,
-        isExpanded: false,
-        underline: const SizedBox(),
-        alignment: Alignment.centerRight,
-        items: <String>[
-          "All",
-          "Basketball",
-          "Futsal",
-          "Table Tennis",
-          "Tennis",
-          "Volley"
-        ]
-            .map<DropdownMenuItem<String>>((value) => DropdownMenuItem(
-                  child: Text(value),
-                  value: value,
-                ))
-            .toList(),
-        onChanged: (value) {
-          _selectedListByCategory = [];
-          setState(() {
-            _selectedDropdownItem = value.toString();
-            for (int i = 0; i < _fieldList.length; i++) {
-              if (_selectedDropdownItem == "All") {
-                _selectedListByCategory = _fieldList;
-              } else if (_fieldList[i].category.name == _selectedDropdownItem) {
-                _selectedListByCategory.add(_fieldList[i]);
-              }
-            }
-          });
-        });
-  }
+  // Widget showDropdown() {
+  //   return DropdownButton<String>(
+  //       value: _selectedDropdownItem,
+  //       iconEnabledColor: colorWhite,
+  //       iconDisabledColor: darkBlue500,
+  //       dropdownColor: darkBlue500,
+  //       style: normalTextStyle.copyWith(color: colorWhite),
+  //       icon: const Icon(Icons.filter_alt),
+  //       isDense: false,
+  //       isExpanded: false,
+  //       underline: const SizedBox(),
+  //       alignment: Alignment.centerRight,
+  //       items: <String>[
+  //         "All",
+  //         "Basketball",
+  //         "Futsal",
+  //         "Table Tennis",
+  //         "Tennis",
+  //         "Volley"
+  //       ]
+  //           .map<DropdownMenuItem<String>>((value) => DropdownMenuItem(
+  //                 child: Text(value),
+  //                 value: value,
+  //               ))
+  //           .toList(),
+  //       onChanged: (value) {
+  //         _selectedListByCategory = [];
+  //         setState(() {
+  //           _selectedDropdownItem = value.toString();
+  //           for (int i = 0; i < _fieldList.length; i++) {
+  //             if (_selectedDropdownItem == "All") {
+  //               _selectedListByCategory = _fieldList;
+  //             } else if (_fieldList[i].category.name == _selectedDropdownItem) {
+  //               _selectedListByCategory.add(_fieldList[i]);
+  //             }
+  //           }
+  //         });
+  //       });
+  // }
 
   Widget searchBar() {
     return Padding(

@@ -1,27 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:sportify_client/sportify_client.dart';
+import 'package:sportify_flutter/main.dart';
+// import 'package:sportify_flutter/model/sport_category.dart';
 
 import '../screen/search_screen.dart';
 import '../theme.dart';
 import '../utils/dummy_data.dart';
 
-class CategoryListView extends StatelessWidget {
+class CategoryListView extends StatefulWidget {
+  @override
+  State<CategoryListView> createState() => _CategoryListViewState();
+}
+
+class _CategoryListViewState extends State<CategoryListView> {
+  List<SportCategory>? spCats;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchSportCategories();
+  }
+
+  void fetchSportCategories() async {
+    try {
+      var spCat = await client.sportCategory.getAllSportCategories();
+
+      setState(() {
+        spCats = spCat;
+      });
+    } on Exception catch (e) {
+      debugPrint('$e');
+      setState(() {
+        _errorMessage = '$e';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < sportCategories.length; i++) {
-      categoryList.add(CategoryCard(
-          title: sportCategories[i].name,
-          imageAsset: sportCategories[i].image));
-    }
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: categoryList,
+    if (spCats != null) {
+      for (int i = 0; i < spCats!.length; i++) {
+        categoryList.add(CategoryCard(
+            title: spCats![i].name, imageAsset: sportCategories[i].image));
+      }
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            children: categoryList,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
   }
 }
 
@@ -46,7 +81,9 @@ class CategoryCard extends StatelessWidget {
           splashColor: primaryColor500.withOpacity(0.5),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return SearchScreen(selectedDropdownItem: title,);
+              return SearchScreen(
+                selectedDropdownItem: title,
+              );
             }));
           },
           child: Container(
