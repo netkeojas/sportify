@@ -12,6 +12,8 @@ import 'package:sportify_flutter/theme.dart';
 // the default port. You will need to modify this to connect to staging or
 // production servers.
 var client = Client('http://localhost:8080/')
+//   ..connectivityMonitor = FlutterConnectivityMonitor();
+// var client = Client('http://10.0.2.2:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
 // void main() {
