@@ -15,10 +15,12 @@ class SportVenueBooking extends _i1.TableRow {
     required this.venueSportHasAreaId,
     required this.dateOfBooking,
     required this.dayOfWeekId,
-    required this.timeSlotOfDayId,
+    required this.startTimeOfBooking,
     required this.totalAmount,
     required this.amountPaid,
     required this.bookingStatus,
+    required this.bookingTimeStamp,
+    required this.numberOfHours,
   }) : super(id);
 
   factory SportVenueBooking.fromJson(
@@ -35,14 +37,18 @@ class SportVenueBooking extends _i1.TableRow {
           .deserialize<DateTime>(jsonSerialization['dateOfBooking']),
       dayOfWeekId: serializationManager
           .deserialize<int>(jsonSerialization['dayOfWeekId']),
-      timeSlotOfDayId: serializationManager
-          .deserialize<List<int>>(jsonSerialization['timeSlotOfDayId']),
+      startTimeOfBooking: serializationManager
+          .deserialize<int>(jsonSerialization['startTimeOfBooking']),
       totalAmount: serializationManager
           .deserialize<double>(jsonSerialization['totalAmount']),
       amountPaid: serializationManager
           .deserialize<double>(jsonSerialization['amountPaid']),
       bookingStatus: serializationManager
           .deserialize<String>(jsonSerialization['bookingStatus']),
+      bookingTimeStamp: serializationManager
+          .deserialize<DateTime>(jsonSerialization['bookingTimeStamp']),
+      numberOfHours: serializationManager
+          .deserialize<int>(jsonSerialization['numberOfHours']),
     );
   }
 
@@ -56,13 +62,17 @@ class SportVenueBooking extends _i1.TableRow {
 
   int dayOfWeekId;
 
-  List<int> timeSlotOfDayId;
+  int startTimeOfBooking;
 
   double totalAmount;
 
   double amountPaid;
 
   String bookingStatus;
+
+  DateTime bookingTimeStamp;
+
+  int numberOfHours;
 
   @override
   String get tableName => 'sport_venue_booking';
@@ -74,10 +84,12 @@ class SportVenueBooking extends _i1.TableRow {
       'venueSportHasAreaId': venueSportHasAreaId,
       'dateOfBooking': dateOfBooking,
       'dayOfWeekId': dayOfWeekId,
-      'timeSlotOfDayId': timeSlotOfDayId,
+      'startTimeOfBooking': startTimeOfBooking,
       'totalAmount': totalAmount,
       'amountPaid': amountPaid,
       'bookingStatus': bookingStatus,
+      'bookingTimeStamp': bookingTimeStamp,
+      'numberOfHours': numberOfHours,
     };
   }
 
@@ -89,10 +101,12 @@ class SportVenueBooking extends _i1.TableRow {
       'venueSportHasAreaId': venueSportHasAreaId,
       'dateOfBooking': dateOfBooking,
       'dayOfWeekId': dayOfWeekId,
-      'timeSlotOfDayId': timeSlotOfDayId,
+      'startTimeOfBooking': startTimeOfBooking,
       'totalAmount': totalAmount,
       'amountPaid': amountPaid,
       'bookingStatus': bookingStatus,
+      'bookingTimeStamp': bookingTimeStamp,
+      'numberOfHours': numberOfHours,
     };
   }
 
@@ -104,10 +118,12 @@ class SportVenueBooking extends _i1.TableRow {
       'venueSportHasAreaId': venueSportHasAreaId,
       'dateOfBooking': dateOfBooking,
       'dayOfWeekId': dayOfWeekId,
-      'timeSlotOfDayId': timeSlotOfDayId,
+      'startTimeOfBooking': startTimeOfBooking,
       'totalAmount': totalAmount,
       'amountPaid': amountPaid,
       'bookingStatus': bookingStatus,
+      'bookingTimeStamp': bookingTimeStamp,
+      'numberOfHours': numberOfHours,
     };
   }
 
@@ -132,8 +148,8 @@ class SportVenueBooking extends _i1.TableRow {
       case 'dayOfWeekId':
         dayOfWeekId = value;
         return;
-      case 'timeSlotOfDayId':
-        timeSlotOfDayId = value;
+      case 'startTimeOfBooking':
+        startTimeOfBooking = value;
         return;
       case 'totalAmount':
         totalAmount = value;
@@ -143,6 +159,12 @@ class SportVenueBooking extends _i1.TableRow {
         return;
       case 'bookingStatus':
         bookingStatus = value;
+        return;
+      case 'bookingTimeStamp':
+        bookingTimeStamp = value;
+        return;
+      case 'numberOfHours':
+        numberOfHours = value;
         return;
       default:
         throw UnimplementedError();
@@ -277,13 +299,17 @@ class SportVenueBookingTable extends _i1.Table {
 
   final dayOfWeekId = _i1.ColumnInt('dayOfWeekId');
 
-  final timeSlotOfDayId = _i1.ColumnSerializable('timeSlotOfDayId');
+  final startTimeOfBooking = _i1.ColumnInt('startTimeOfBooking');
 
   final totalAmount = _i1.ColumnDouble('totalAmount');
 
   final amountPaid = _i1.ColumnDouble('amountPaid');
 
   final bookingStatus = _i1.ColumnString('bookingStatus');
+
+  final bookingTimeStamp = _i1.ColumnDateTime('bookingTimeStamp');
+
+  final numberOfHours = _i1.ColumnInt('numberOfHours');
 
   @override
   List<_i1.Column> get columns => [
@@ -292,10 +318,12 @@ class SportVenueBookingTable extends _i1.Table {
         venueSportHasAreaId,
         dateOfBooking,
         dayOfWeekId,
-        timeSlotOfDayId,
+        startTimeOfBooking,
         totalAmount,
         amountPaid,
         bookingStatus,
+        bookingTimeStamp,
+        numberOfHours,
       ];
 }
 

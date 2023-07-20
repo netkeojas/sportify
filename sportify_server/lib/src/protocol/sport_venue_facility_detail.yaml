@@ -2,7 +2,9 @@ class: SportVenueFacilityDetail
 table: sport_venue_facility_detail
 fields:
   venueHasSportAreaId: int
-  dayOfWeekIds: List<int>
-  timeSlotForDayIds: List<int>
+  fromDay: int
+  toDay: int
+  fromTime: int
+  toTime: int
   pricePerHour: double
   pricePerPerson: double

@@ -5,7 +5,9 @@ fields:
   venueSportHasAreaId: List<int>
   dateOfBooking: DateTime
   dayOfWeekId: int
-  timeSlotOfDayId: List<int>
+  startTimeOfBooking: int
   totalAmount: double
   amountPaid: double
   bookingStatus: String
+  bookingTimeStamp: DateTime
+  numberOfHours: int

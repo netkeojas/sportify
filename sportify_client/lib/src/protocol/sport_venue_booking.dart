@@ -15,10 +15,12 @@ class SportVenueBooking extends _i1.SerializableEntity {
     required this.venueSportHasAreaId,
     required this.dateOfBooking,
     required this.dayOfWeekId,
-    required this.timeSlotOfDayId,
+    required this.startTimeOfBooking,
     required this.totalAmount,
     required this.amountPaid,
     required this.bookingStatus,
+    required this.bookingTimeStamp,
+    required this.numberOfHours,
   });
 
   factory SportVenueBooking.fromJson(
@@ -35,14 +37,18 @@ class SportVenueBooking extends _i1.SerializableEntity {
           .deserialize<DateTime>(jsonSerialization['dateOfBooking']),
       dayOfWeekId: serializationManager
           .deserialize<int>(jsonSerialization['dayOfWeekId']),
-      timeSlotOfDayId: serializationManager
-          .deserialize<List<int>>(jsonSerialization['timeSlotOfDayId']),
+      startTimeOfBooking: serializationManager
+          .deserialize<int>(jsonSerialization['startTimeOfBooking']),
       totalAmount: serializationManager
           .deserialize<double>(jsonSerialization['totalAmount']),
       amountPaid: serializationManager
           .deserialize<double>(jsonSerialization['amountPaid']),
       bookingStatus: serializationManager
           .deserialize<String>(jsonSerialization['bookingStatus']),
+      bookingTimeStamp: serializationManager
+          .deserialize<DateTime>(jsonSerialization['bookingTimeStamp']),
+      numberOfHours: serializationManager
+          .deserialize<int>(jsonSerialization['numberOfHours']),
     );
   }
 
@@ -59,13 +65,17 @@ class SportVenueBooking extends _i1.SerializableEntity {
 
   int dayOfWeekId;
 
-  List<int> timeSlotOfDayId;
+  int startTimeOfBooking;
 
   double totalAmount;
 
   double amountPaid;
 
   String bookingStatus;
+
+  DateTime bookingTimeStamp;
+
+  int numberOfHours;
 
   @override
   Map<String, dynamic> toJson() {
@@ -75,10 +85,12 @@ class SportVenueBooking extends _i1.SerializableEntity {
       'venueSportHasAreaId': venueSportHasAreaId,
       'dateOfBooking': dateOfBooking,
       'dayOfWeekId': dayOfWeekId,
-      'timeSlotOfDayId': timeSlotOfDayId,
+      'startTimeOfBooking': startTimeOfBooking,
       'totalAmount': totalAmount,
       'amountPaid': amountPaid,
       'bookingStatus': bookingStatus,
+      'bookingTimeStamp': bookingTimeStamp,
+      'numberOfHours': numberOfHours,
     };
   }
 }

@@ -12,8 +12,10 @@ class SportVenueFacilityDetail extends _i1.SerializableEntity {
   SportVenueFacilityDetail({
     this.id,
     required this.venueHasSportAreaId,
-    required this.dayOfWeekIds,
-    required this.timeSlotForDayIds,
+    required this.fromDay,
+    required this.toDay,
+    required this.fromTime,
+    required this.toTime,
     required this.pricePerHour,
     required this.pricePerPerson,
   });
@@ -26,10 +28,13 @@ class SportVenueFacilityDetail extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       venueHasSportAreaId: serializationManager
           .deserialize<int>(jsonSerialization['venueHasSportAreaId']),
-      dayOfWeekIds: serializationManager
-          .deserialize<List<int>>(jsonSerialization['dayOfWeekIds']),
-      timeSlotForDayIds: serializationManager
-          .deserialize<List<int>>(jsonSerialization['timeSlotForDayIds']),
+      fromDay:
+          serializationManager.deserialize<int>(jsonSerialization['fromDay']),
+      toDay: serializationManager.deserialize<int>(jsonSerialization['toDay']),
+      fromTime:
+          serializationManager.deserialize<int>(jsonSerialization['fromTime']),
+      toTime:
+          serializationManager.deserialize<int>(jsonSerialization['toTime']),
       pricePerHour: serializationManager
           .deserialize<double>(jsonSerialization['pricePerHour']),
       pricePerPerson: serializationManager
@@ -44,9 +49,13 @@ class SportVenueFacilityDetail extends _i1.SerializableEntity {
 
   int venueHasSportAreaId;
 
-  List<int> dayOfWeekIds;
+  int fromDay;
 
-  List<int> timeSlotForDayIds;
+  int toDay;
+
+  int fromTime;
+
+  int toTime;
 
   double pricePerHour;
 
@@ -57,8 +66,10 @@ class SportVenueFacilityDetail extends _i1.SerializableEntity {
     return {
       'id': id,
       'venueHasSportAreaId': venueHasSportAreaId,
-      'dayOfWeekIds': dayOfWeekIds,
-      'timeSlotForDayIds': timeSlotForDayIds,
+      'fromDay': fromDay,
+      'toDay': toDay,
+      'fromTime': fromTime,
+      'toTime': toTime,
       'pricePerHour': pricePerHour,
       'pricePerPerson': pricePerPerson,
     };
