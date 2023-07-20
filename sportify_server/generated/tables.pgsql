@@ -79,10 +79,12 @@ CREATE TABLE "sport_venue_booking" (
   "venueSportHasAreaId" json NOT NULL,
   "dateOfBooking" timestamp without time zone NOT NULL,
   "dayOfWeekId" integer NOT NULL,
-  "timeSlotOfDayId" json NOT NULL,
+  "startTimeOfBooking" integer NOT NULL,
   "totalAmount" double precision NOT NULL,
   "amountPaid" double precision NOT NULL,
-  "bookingStatus" text NOT NULL
+  "bookingStatus" text NOT NULL,
+  "bookingTimeStamp" timestamp without time zone NOT NULL,
+  "numberOfHours" integer NOT NULL
 );
 
 ALTER TABLE ONLY "sport_venue_booking"
@@ -96,8 +98,10 @@ ALTER TABLE ONLY "sport_venue_booking"
 CREATE TABLE "sport_venue_facility_detail" (
   "id" serial,
   "venueHasSportAreaId" integer NOT NULL,
-  "dayOfWeekIds" json NOT NULL,
-  "timeSlotForDayIds" json NOT NULL,
+  "fromDay" integer NOT NULL,
+  "toDay" integer NOT NULL,
+  "fromTime" integer NOT NULL,
+  "toTime" integer NOT NULL,
   "pricePerHour" double precision NOT NULL,
   "pricePerPerson" double precision NOT NULL
 );

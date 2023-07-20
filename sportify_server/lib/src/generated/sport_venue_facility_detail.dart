@@ -12,8 +12,10 @@ class SportVenueFacilityDetail extends _i1.TableRow {
   SportVenueFacilityDetail({
     int? id,
     required this.venueHasSportAreaId,
-    required this.dayOfWeekIds,
-    required this.timeSlotForDayIds,
+    required this.fromDay,
+    required this.toDay,
+    required this.fromTime,
+    required this.toTime,
     required this.pricePerHour,
     required this.pricePerPerson,
   }) : super(id);
@@ -26,10 +28,13 @@ class SportVenueFacilityDetail extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       venueHasSportAreaId: serializationManager
           .deserialize<int>(jsonSerialization['venueHasSportAreaId']),
-      dayOfWeekIds: serializationManager
-          .deserialize<List<int>>(jsonSerialization['dayOfWeekIds']),
-      timeSlotForDayIds: serializationManager
-          .deserialize<List<int>>(jsonSerialization['timeSlotForDayIds']),
+      fromDay:
+          serializationManager.deserialize<int>(jsonSerialization['fromDay']),
+      toDay: serializationManager.deserialize<int>(jsonSerialization['toDay']),
+      fromTime:
+          serializationManager.deserialize<int>(jsonSerialization['fromTime']),
+      toTime:
+          serializationManager.deserialize<int>(jsonSerialization['toTime']),
       pricePerHour: serializationManager
           .deserialize<double>(jsonSerialization['pricePerHour']),
       pricePerPerson: serializationManager
@@ -41,9 +46,13 @@ class SportVenueFacilityDetail extends _i1.TableRow {
 
   int venueHasSportAreaId;
 
-  List<int> dayOfWeekIds;
+  int fromDay;
 
-  List<int> timeSlotForDayIds;
+  int toDay;
+
+  int fromTime;
+
+  int toTime;
 
   double pricePerHour;
 
@@ -56,8 +65,10 @@ class SportVenueFacilityDetail extends _i1.TableRow {
     return {
       'id': id,
       'venueHasSportAreaId': venueHasSportAreaId,
-      'dayOfWeekIds': dayOfWeekIds,
-      'timeSlotForDayIds': timeSlotForDayIds,
+      'fromDay': fromDay,
+      'toDay': toDay,
+      'fromTime': fromTime,
+      'toTime': toTime,
       'pricePerHour': pricePerHour,
       'pricePerPerson': pricePerPerson,
     };
@@ -68,8 +79,10 @@ class SportVenueFacilityDetail extends _i1.TableRow {
     return {
       'id': id,
       'venueHasSportAreaId': venueHasSportAreaId,
-      'dayOfWeekIds': dayOfWeekIds,
-      'timeSlotForDayIds': timeSlotForDayIds,
+      'fromDay': fromDay,
+      'toDay': toDay,
+      'fromTime': fromTime,
+      'toTime': toTime,
       'pricePerHour': pricePerHour,
       'pricePerPerson': pricePerPerson,
     };
@@ -80,8 +93,10 @@ class SportVenueFacilityDetail extends _i1.TableRow {
     return {
       'id': id,
       'venueHasSportAreaId': venueHasSportAreaId,
-      'dayOfWeekIds': dayOfWeekIds,
-      'timeSlotForDayIds': timeSlotForDayIds,
+      'fromDay': fromDay,
+      'toDay': toDay,
+      'fromTime': fromTime,
+      'toTime': toTime,
       'pricePerHour': pricePerHour,
       'pricePerPerson': pricePerPerson,
     };
@@ -99,11 +114,17 @@ class SportVenueFacilityDetail extends _i1.TableRow {
       case 'venueHasSportAreaId':
         venueHasSportAreaId = value;
         return;
-      case 'dayOfWeekIds':
-        dayOfWeekIds = value;
+      case 'fromDay':
+        fromDay = value;
         return;
-      case 'timeSlotForDayIds':
-        timeSlotForDayIds = value;
+      case 'toDay':
+        toDay = value;
+        return;
+      case 'fromTime':
+        fromTime = value;
+        return;
+      case 'toTime':
+        toTime = value;
         return;
       case 'pricePerHour':
         pricePerHour = value;
@@ -239,9 +260,13 @@ class SportVenueFacilityDetailTable extends _i1.Table {
 
   final venueHasSportAreaId = _i1.ColumnInt('venueHasSportAreaId');
 
-  final dayOfWeekIds = _i1.ColumnSerializable('dayOfWeekIds');
+  final fromDay = _i1.ColumnInt('fromDay');
 
-  final timeSlotForDayIds = _i1.ColumnSerializable('timeSlotForDayIds');
+  final toDay = _i1.ColumnInt('toDay');
+
+  final fromTime = _i1.ColumnInt('fromTime');
+
+  final toTime = _i1.ColumnInt('toTime');
 
   final pricePerHour = _i1.ColumnDouble('pricePerHour');
 
@@ -251,8 +276,10 @@ class SportVenueFacilityDetailTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         venueHasSportAreaId,
-        dayOfWeekIds,
-        timeSlotForDayIds,
+        fromDay,
+        toDay,
+        fromTime,
+        toTime,
         pricePerHour,
         pricePerPerson,
       ];

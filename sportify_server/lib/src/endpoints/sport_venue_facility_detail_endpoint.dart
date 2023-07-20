@@ -4,12 +4,14 @@ import '../generated/protocol.dart';
 /*
 Object strcture 
 {
-  id: int
-  venueHasSportAreaId: int
-  dayOfWeekIds: List<int>
-  timeSlotForDayIds: List<int>
-  pricePerHour: double
-  pricePerPerson: double
+  id: 1001
+  venueHasSportAreaId: 101
+  fromDay: 1
+  toDay: 5
+  fromTime: 6
+  toTime: 12
+  pricePerHour: 800
+  pricePerPerson: 0
 }
 */
 class SportVenueFacilityDetailEndpoint extends Endpoint {
@@ -29,8 +31,10 @@ Fetches all the sportVenueFacilityDetails
   {
   id: 1001
   venueHasSportAreaId: 101
-  dayOfWeekIds: [1,2,3,4,5]
-  timeSlotForDayIds: [7,8,9,10]
+  fromDay: 1
+  toDay: 5
+  fromTime: 6
+  toTime: 12
   pricePerHour: 800
   pricePerPerson: 0
 },
@@ -51,8 +55,10 @@ Fetches all the sportVenueFacilityDetails for given sportAreaId
   {
   id: 1001
   venueHasSportAreaId: 101
-  dayOfWeekIds: [1,2,3,4,5]
-  timeSlotForDayIds: [7,8,9,10]
+  fromDay: 1
+  toDay: 5
+  fromTime: 6
+  toTime: 12
   pricePerHour: 800
   pricePerPerson: 0
 },

@@ -154,220 +154,84 @@ void addTimeSlotData(timeSLotOfDayClient) async {
 
 void addSportFacilityDetailData(sportFacilityDetailsClient) async {
   var sportFacilityDetail = SportVenueFacilityDetail(
-      venueHasSportAreaId: 11,
-      dayOfWeekIds: [1, 2, 3, 4, 5],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
+      venueHasSportAreaId: 10,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 6,
+      toTime: 12,
       pricePerHour: 800,
       pricePerPerson: 0);
   var sportFacilityDetail2 = SportVenueFacilityDetail(
-      venueHasSportAreaId: 11,
-      dayOfWeekIds: [6, 7],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 1000,
+      venueHasSportAreaId: 10,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 12,
+      toTime: 16,
+      pricePerHour: 500,
       pricePerPerson: 0);
   var sportFacilityDetail3 = SportVenueFacilityDetail(
       venueHasSportAreaId: 10,
-      dayOfWeekIds: [6, 7],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 1000,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 16,
+      toTime: 24,
+      pricePerHour: 800,
       pricePerPerson: 0);
   var sportFacilityDetail4 = SportVenueFacilityDetail(
       venueHasSportAreaId: 10,
-      dayOfWeekIds: [1, 2, 3, 4, 5],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
+      fromDay: 6,
+      toDay: 7,
+      fromTime: 6,
+      toTime: 24,
       pricePerHour: 800,
       pricePerPerson: 0);
   var sportFacilityDetail5 = SportVenueFacilityDetail(
-      venueHasSportAreaId: 6,
-      dayOfWeekIds: [1, 2, 3, 4, 5],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 200,
+      venueHasSportAreaId: 11,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 6,
+      toTime: 12,
+      pricePerHour: 1800,
       pricePerPerson: 0);
   var sportFacilityDetail6 = SportVenueFacilityDetail(
-      venueHasSportAreaId: 6,
-      dayOfWeekIds: [6, 7],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 400,
+      venueHasSportAreaId: 11,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 12,
+      toTime: 16,
+      pricePerHour: 1500,
       pricePerPerson: 0);
   var sportFacilityDetail7 = SportVenueFacilityDetail(
-      venueHasSportAreaId: 7,
-      dayOfWeekIds: [6, 7],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 400,
+      venueHasSportAreaId: 11,
+      fromDay: 1,
+      toDay: 5,
+      fromTime: 16,
+      toTime: 24,
+      pricePerHour: 1800,
       pricePerPerson: 0);
   var sportFacilityDetail8 = SportVenueFacilityDetail(
-      venueHasSportAreaId: 7,
-      dayOfWeekIds: [1, 2, 3, 4, 5],
-      timeSlotForDayIds: [
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      pricePerHour: 200,
+      venueHasSportAreaId: 11,
+      fromDay: 6,
+      toDay: 7,
+      fromTime: 6,
+      toTime: 24,
+      pricePerHour: 1800,
       pricePerPerson: 0);
   await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail8);
-  await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail7);
-  await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail6);
-  await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail5);
-  await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail4);
-  await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail3);
+      .addSportVenueFacilityDetail(sportFacilityDetail);
   await sportFacilityDetailsClient
       .addSportVenueFacilityDetail(sportFacilityDetail2);
   await sportFacilityDetailsClient
-      .addSportVenueFacilityDetail(sportFacilityDetail);
+      .addSportVenueFacilityDetail(sportFacilityDetail3);
+  await sportFacilityDetailsClient
+      .addSportVenueFacilityDetail(sportFacilityDetail4);
+  await sportFacilityDetailsClient
+      .addSportVenueFacilityDetail(sportFacilityDetail5);
+  await sportFacilityDetailsClient
+      .addSportVenueFacilityDetail(sportFacilityDetail6);
+  await sportFacilityDetailsClient
+      .addSportVenueFacilityDetail(sportFacilityDetail7);
+  await sportFacilityDetailsClient
+      .addSportVenueFacilityDetail(sportFacilityDetail8);
   print('added data');
 }

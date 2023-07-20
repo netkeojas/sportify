@@ -9,10 +9,12 @@ Object structure
   venueSportHasAreaId: List<int>
   dateOfBooking: DateTime
   dayOfWeekId: int
-  timeSlotOfDayId: List<int>
+  startTimeOfBooking: int
   totalAmount: double
   amountPaid: double
   bookingStatus: String
+  bookingTimeStamp: DateTime
+  numberOfHours: int
 }
 */
 class SportVenueBookingEndpoint extends Endpoint {
@@ -34,10 +36,12 @@ Fetches all the sports bookings in database
   venueSportHasAreaId: [101]
   dateOfBooking: 21-12-23
   dayOfWeekId: 2
-  timeSlotOfDayId: [8]
+  startTimeOfBooking: 7
   totalAmount: 450
   amountPaid: 0
   bookingStatus: Unpaid
+  bookingTimeStamp: 12-12-23
+  numberOfHours: 1
 }, {...}, {....}
 ]
 */
@@ -58,10 +62,12 @@ Fetches all the sports bookings in database for given player
   venueSportHasAreaId: [101]
   dateOfBooking: 21-12-23
   dayOfWeekId: 2
-  timeSlotOfDayId: [8]
+  startTimeOfBooking: 7
   totalAmount: 450
   amountPaid: 0
   bookingStatus: Unpaid
+  bookingTimeStamp: 12-12-23
+  numberOfHours: 1
 }, { .., playerId: 2, ....}, { .., playerId: 2, ...}
 ]
 */
