@@ -21,6 +21,7 @@ Display fields: {
   3. fromTime - toTime -> 6 am - 12 pm
   4. pricePerHOur -> 800 $
 }
+This will be a static screen, no actions just used to display the information.
 */
 class FacilityDetailScreen extends StatelessWidget {
   List<FacilityDetail> facilityDetailList;

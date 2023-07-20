@@ -206,6 +206,13 @@ class DetailScreen extends StatelessWidget {
               //     field: field,
               //   );
               // }));
+              // Show an option to select sport, call the select_a_sport screen with param field.sportCategories
+              var sports = [];
+              for (var element in field.sportCategories ?? []) {
+                // print(element.sportCategory.name);
+                sports.add(element.sportCategory.name);
+              }
+              print(sports);
             },
             child: const Text("Book Now")),
       ),
