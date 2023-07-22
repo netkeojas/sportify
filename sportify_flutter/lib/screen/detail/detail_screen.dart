@@ -201,11 +201,13 @@ class DetailScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(borderRadiusSize))),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return CheckoutScreen(
-              //     field: field,
-              //   );
-              // }));
+              // this will be removed from here and will go to the select_a_sport screen's onClick
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CheckoutScreen(
+                  field: field,
+                  sportCategoryIndex: 0,
+                );
+              }));
 
               // Show an option to select sport, call the select_a_sport screen with param field
               var sports = [];
