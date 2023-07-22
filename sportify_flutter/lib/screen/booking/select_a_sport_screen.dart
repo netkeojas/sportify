@@ -33,7 +33,8 @@ eg:- {
   Cricket (clickable)
   Football (clickable)
 }
-onTap action -> This will take us to booking screen where we will pass the SportVenueDetail object and index of the <List>SportCategoryDetails which category is selected.
+onTap action -> This will take us to CheckoutScreen
+pass the SportVenueDetail object and index of the <List>SportCategoryDetails which category is selected.
 */
 class SelectASportScreen extends StatelessWidget {
   SportVenueDetail sportVenueDetail;
