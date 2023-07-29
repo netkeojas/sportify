@@ -423,6 +423,31 @@ class Endpoints extends _i1.EndpointDispatch {
             playerId: params['playerId'],
           ),
         ),
+        'getAllSportVenueBookingsForDateAndArea': _i1.MethodConnector(
+          name: 'getAllSportVenueBookingsForDateAndArea',
+          params: {
+            'venueSportHasAreaId': _i1.ParameterDescription(
+              name: 'venueSportHasAreaId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            ),
+            'dateTime': _i1.ParameterDescription(
+              name: 'dateTime',
+              type: _i1.getType<DateTime?>(),
+              nullable: true,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['sportVenueBooking'] as _i6.SportVenueBookingEndpoint)
+                  .getAllSportVenueBookingsForDateAndArea(
+            session,
+            venueSportHasAreaId: params['venueSportHasAreaId'],
+            dateTime: params['dateTime'],
+          ),
+        ),
       },
     );
     connectors['sportVenue'] = _i1.EndpointConnector(

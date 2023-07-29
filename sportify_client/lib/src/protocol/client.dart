@@ -197,6 +197,20 @@ class _EndpointSportVenueBooking extends _i1.EndpointRef {
         'getAllSportVenueBookingsForPlayer',
         {'playerId': playerId},
       );
+
+  _i2.Future<List<_i6.SportVenueBooking>>
+      getAllSportVenueBookingsForDateAndArea({
+    int? venueSportHasAreaId,
+    DateTime? dateTime,
+  }) =>
+          caller.callServerEndpoint<List<_i6.SportVenueBooking>>(
+            'sportVenueBooking',
+            'getAllSportVenueBookingsForDateAndArea',
+            {
+              'venueSportHasAreaId': venueSportHasAreaId,
+              'dateTime': dateTime,
+            },
+          );
 }
 
 class _EndpointSportVenue extends _i1.EndpointRef {

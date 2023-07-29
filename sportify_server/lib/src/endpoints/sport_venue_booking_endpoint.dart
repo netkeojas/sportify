@@ -80,4 +80,20 @@ Fetches all the sports bookings in database for given player
           playerId != null ? t.playerId.equals(playerId) : Constant(true),
     );
   }
+
+  Future<List<SportVenueBooking>> getAllSportVenueBookingsForDateAndArea(
+      Session session,
+      {int? venueSportHasAreaId,
+      DateTime? dateTime}) async {
+    return await SportVenueBooking.find(
+      session,
+      where: (t) =>
+          (venueSportHasAreaId != null
+              ? t.venueSportHasAreaId.equals(venueSportHasAreaId)
+              : Constant(true)) &
+          (dateTime != null
+              ? t.dateOfBooking.equals(dateTime)
+              : Constant(true)),
+    );
+  }
 }
