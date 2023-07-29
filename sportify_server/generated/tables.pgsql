@@ -76,7 +76,7 @@ ALTER TABLE ONLY "sport_venue"
 CREATE TABLE "sport_venue_booking" (
   "id" serial,
   "playerId" integer NOT NULL,
-  "venueSportHasAreaId" json NOT NULL,
+  "venueSportHasAreaId" integer NOT NULL,
   "dateOfBooking" timestamp without time zone NOT NULL,
   "dayOfWeekId" integer NOT NULL,
   "startTimeOfBooking" integer NOT NULL,

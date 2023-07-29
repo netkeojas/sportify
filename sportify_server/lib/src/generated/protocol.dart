@@ -329,9 +329,9 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'venueSportHasAreaId',
-          columnType: _i2.ColumnType.json,
+          columnType: _i2.ColumnType.integer,
           isNullable: false,
-          dartType: 'List<int>',
+          dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'dateOfBooking',
