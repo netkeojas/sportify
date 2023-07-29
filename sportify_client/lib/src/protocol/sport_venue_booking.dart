@@ -32,7 +32,7 @@ class SportVenueBooking extends _i1.SerializableEntity {
       playerId:
           serializationManager.deserialize<int>(jsonSerialization['playerId']),
       venueSportHasAreaId: serializationManager
-          .deserialize<List<int>>(jsonSerialization['venueSportHasAreaId']),
+          .deserialize<int>(jsonSerialization['venueSportHasAreaId']),
       dateOfBooking: serializationManager
           .deserialize<DateTime>(jsonSerialization['dateOfBooking']),
       dayOfWeekId: serializationManager
@@ -59,7 +59,7 @@ class SportVenueBooking extends _i1.SerializableEntity {
 
   int playerId;
 
-  List<int> venueSportHasAreaId;
+  int venueSportHasAreaId;
 
   DateTime dateOfBooking;
 

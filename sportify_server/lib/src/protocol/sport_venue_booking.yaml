@@ -2,7 +2,7 @@ class: SportVenueBooking
 table: sport_venue_booking
 fields:
   playerId: int
-  venueSportHasAreaId: List<int>
+  venueSportHasAreaId: int
   dateOfBooking: DateTime
   dayOfWeekId: int
   startTimeOfBooking: int

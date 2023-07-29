@@ -32,7 +32,7 @@ class SportVenueBooking extends _i1.TableRow {
       playerId:
           serializationManager.deserialize<int>(jsonSerialization['playerId']),
       venueSportHasAreaId: serializationManager
-          .deserialize<List<int>>(jsonSerialization['venueSportHasAreaId']),
+          .deserialize<int>(jsonSerialization['venueSportHasAreaId']),
       dateOfBooking: serializationManager
           .deserialize<DateTime>(jsonSerialization['dateOfBooking']),
       dayOfWeekId: serializationManager
@@ -56,7 +56,7 @@ class SportVenueBooking extends _i1.TableRow {
 
   int playerId;
 
-  List<int> venueSportHasAreaId;
+  int venueSportHasAreaId;
 
   DateTime dateOfBooking;
 
@@ -293,7 +293,7 @@ class SportVenueBookingTable extends _i1.Table {
 
   final playerId = _i1.ColumnInt('playerId');
 
-  final venueSportHasAreaId = _i1.ColumnSerializable('venueSportHasAreaId');
+  final venueSportHasAreaId = _i1.ColumnInt('venueSportHasAreaId');
 
   final dateOfBooking = _i1.ColumnDateTime('dateOfBooking');
 
