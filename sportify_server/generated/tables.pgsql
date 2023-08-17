@@ -55,14 +55,16 @@ CREATE TABLE "sport_venue" (
   "name" text NOT NULL,
   "address" text NOT NULL,
   "locationUrl" text NOT NULL,
-  "openTiming" text NOT NULL,
+  "city" text NOT NULL,
   "aboutVenue" text NOT NULL,
   "gstNumber" text NOT NULL,
   "socialMediaIds" json NOT NULL,
   "contactPerson" text NOT NULL,
   "contactNumber" text NOT NULL,
   "imageUrl" json NOT NULL,
-  "aminities" json NOT NULL
+  "aminities" json NOT NULL,
+  "openingTime" integer NOT NULL,
+  "closingTime" integer NOT NULL
 );
 
 ALTER TABLE ONLY "sport_venue"

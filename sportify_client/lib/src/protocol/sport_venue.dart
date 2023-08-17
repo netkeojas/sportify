@@ -14,7 +14,7 @@ class SportVenue extends _i1.SerializableEntity {
     required this.name,
     required this.address,
     required this.locationUrl,
-    required this.openTiming,
+    required this.city,
     required this.aboutVenue,
     required this.gstNumber,
     required this.socialMediaIds,
@@ -22,6 +22,8 @@ class SportVenue extends _i1.SerializableEntity {
     required this.contactNumber,
     required this.imageUrl,
     required this.aminities,
+    required this.openingTime,
+    required this.closingTime,
   });
 
   factory SportVenue.fromJson(
@@ -35,8 +37,7 @@ class SportVenue extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['address']),
       locationUrl: serializationManager
           .deserialize<String>(jsonSerialization['locationUrl']),
-      openTiming: serializationManager
-          .deserialize<String>(jsonSerialization['openTiming']),
+      city: serializationManager.deserialize<String>(jsonSerialization['city']),
       aboutVenue: serializationManager
           .deserialize<String>(jsonSerialization['aboutVenue']),
       gstNumber: serializationManager
@@ -51,6 +52,10 @@ class SportVenue extends _i1.SerializableEntity {
           .deserialize<List<String>>(jsonSerialization['imageUrl']),
       aminities: serializationManager
           .deserialize<List<int>>(jsonSerialization['aminities']),
+      openingTime: serializationManager
+          .deserialize<int>(jsonSerialization['openingTime']),
+      closingTime: serializationManager
+          .deserialize<int>(jsonSerialization['closingTime']),
     );
   }
 
@@ -65,7 +70,7 @@ class SportVenue extends _i1.SerializableEntity {
 
   String locationUrl;
 
-  String openTiming;
+  String city;
 
   String aboutVenue;
 
@@ -81,6 +86,10 @@ class SportVenue extends _i1.SerializableEntity {
 
   List<int> aminities;
 
+  int openingTime;
+
+  int closingTime;
+
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -88,7 +97,7 @@ class SportVenue extends _i1.SerializableEntity {
       'name': name,
       'address': address,
       'locationUrl': locationUrl,
-      'openTiming': openTiming,
+      'city': city,
       'aboutVenue': aboutVenue,
       'gstNumber': gstNumber,
       'socialMediaIds': socialMediaIds,
@@ -96,6 +105,8 @@ class SportVenue extends _i1.SerializableEntity {
       'contactNumber': contactNumber,
       'imageUrl': imageUrl,
       'aminities': aminities,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
     };
   }
 }

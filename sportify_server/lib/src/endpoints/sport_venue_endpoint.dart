@@ -7,14 +7,16 @@ class SportVenueEndpoint extends Endpoint {
    @return List of type SportVenue => [{ id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
-  openTiming: '6am - 11pm'
+  city: 'Kolhapur'
   aboutVenue: 'lorem epsum....'
   gstNumber: '1234'
   socialMediaIds: ['insta','twitter']
   contactPerson: 'Jim'
   contactNumber: '9822411323'
   imageUrl: ['abc.jpeg', 'xyz.png]
-  aminities: [2,4]}, 
+  aminities: [2,4],
+  openingTime: 6,
+  closingTime: 24}, 
    { ..... }, {....}]
   */
   Future<List<SportVenue>> getAllSportVenues(Session session) async {
@@ -27,14 +29,16 @@ class SportVenueEndpoint extends Endpoint {
    @return Object/record of type SportVenue => { id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
-  openTiming: '6am - 11pm'
+  city: 'Kolhapur'
   aboutVenue: 'lorem epsum....'
   gstNumber: '1234'
   socialMediaIds: ['insta','twitter']
   contactPerson: 'Jim'
   contactNumber: '9822411323'
   imageUrl: ['abc.jpeg', 'xyz.png]
-  aminities: [2,4] }
+  aminities: [2,4],
+  openingTime: 6,
+  closingTime: 24}
   */
   Future<SportVenue?> getSportVenueById(Session session, int id) async {
     return await SportVenue.findById(session, id);
@@ -46,14 +50,16 @@ class SportVenueEndpoint extends Endpoint {
    @return List of type SportVenue => [{ id: 10001, name: 'tck'
   address: 'kolhapur'
   locationUrl: 'location.xyz'
-  openTiming: '6am - 11pm'
+  city: 'Kolhapur'
   aboutVenue: 'lorem epsum....'
   gstNumber: '1234'
   socialMediaIds: ['insta','twitter']
   contactPerson: 'Jim'
   contactNumber: '9822411323'
   imageUrl: ['abc.jpeg', 'xyz.png]
-  aminities: [2,4]}, 
+  aminities: [2,4],
+  openingTime: 6,
+  closingTime: 24}, 
    { ..... }, {....}]
   */
   Future<List<SportVenue>> getSportVenuesByName(Session session,

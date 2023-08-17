@@ -14,7 +14,7 @@ class SportVenue extends _i1.TableRow {
     required this.name,
     required this.address,
     required this.locationUrl,
-    required this.openTiming,
+    required this.city,
     required this.aboutVenue,
     required this.gstNumber,
     required this.socialMediaIds,
@@ -22,6 +22,8 @@ class SportVenue extends _i1.TableRow {
     required this.contactNumber,
     required this.imageUrl,
     required this.aminities,
+    required this.openingTime,
+    required this.closingTime,
   }) : super(id);
 
   factory SportVenue.fromJson(
@@ -35,8 +37,7 @@ class SportVenue extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['address']),
       locationUrl: serializationManager
           .deserialize<String>(jsonSerialization['locationUrl']),
-      openTiming: serializationManager
-          .deserialize<String>(jsonSerialization['openTiming']),
+      city: serializationManager.deserialize<String>(jsonSerialization['city']),
       aboutVenue: serializationManager
           .deserialize<String>(jsonSerialization['aboutVenue']),
       gstNumber: serializationManager
@@ -51,6 +52,10 @@ class SportVenue extends _i1.TableRow {
           .deserialize<List<String>>(jsonSerialization['imageUrl']),
       aminities: serializationManager
           .deserialize<List<int>>(jsonSerialization['aminities']),
+      openingTime: serializationManager
+          .deserialize<int>(jsonSerialization['openingTime']),
+      closingTime: serializationManager
+          .deserialize<int>(jsonSerialization['closingTime']),
     );
   }
 
@@ -62,7 +67,7 @@ class SportVenue extends _i1.TableRow {
 
   String locationUrl;
 
-  String openTiming;
+  String city;
 
   String aboutVenue;
 
@@ -78,6 +83,10 @@ class SportVenue extends _i1.TableRow {
 
   List<int> aminities;
 
+  int openingTime;
+
+  int closingTime;
+
   @override
   String get tableName => 'sport_venue';
   @override
@@ -87,7 +96,7 @@ class SportVenue extends _i1.TableRow {
       'name': name,
       'address': address,
       'locationUrl': locationUrl,
-      'openTiming': openTiming,
+      'city': city,
       'aboutVenue': aboutVenue,
       'gstNumber': gstNumber,
       'socialMediaIds': socialMediaIds,
@@ -95,6 +104,8 @@ class SportVenue extends _i1.TableRow {
       'contactNumber': contactNumber,
       'imageUrl': imageUrl,
       'aminities': aminities,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
     };
   }
 
@@ -105,7 +116,7 @@ class SportVenue extends _i1.TableRow {
       'name': name,
       'address': address,
       'locationUrl': locationUrl,
-      'openTiming': openTiming,
+      'city': city,
       'aboutVenue': aboutVenue,
       'gstNumber': gstNumber,
       'socialMediaIds': socialMediaIds,
@@ -113,6 +124,8 @@ class SportVenue extends _i1.TableRow {
       'contactNumber': contactNumber,
       'imageUrl': imageUrl,
       'aminities': aminities,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
     };
   }
 
@@ -123,7 +136,7 @@ class SportVenue extends _i1.TableRow {
       'name': name,
       'address': address,
       'locationUrl': locationUrl,
-      'openTiming': openTiming,
+      'city': city,
       'aboutVenue': aboutVenue,
       'gstNumber': gstNumber,
       'socialMediaIds': socialMediaIds,
@@ -131,6 +144,8 @@ class SportVenue extends _i1.TableRow {
       'contactNumber': contactNumber,
       'imageUrl': imageUrl,
       'aminities': aminities,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
     };
   }
 
@@ -152,8 +167,8 @@ class SportVenue extends _i1.TableRow {
       case 'locationUrl':
         locationUrl = value;
         return;
-      case 'openTiming':
-        openTiming = value;
+      case 'city':
+        city = value;
         return;
       case 'aboutVenue':
         aboutVenue = value;
@@ -175,6 +190,12 @@ class SportVenue extends _i1.TableRow {
         return;
       case 'aminities':
         aminities = value;
+        return;
+      case 'openingTime':
+        openingTime = value;
+        return;
+      case 'closingTime':
+        closingTime = value;
         return;
       default:
         throw UnimplementedError();
@@ -306,7 +327,7 @@ class SportVenueTable extends _i1.Table {
 
   final locationUrl = _i1.ColumnString('locationUrl');
 
-  final openTiming = _i1.ColumnString('openTiming');
+  final city = _i1.ColumnString('city');
 
   final aboutVenue = _i1.ColumnString('aboutVenue');
 
@@ -322,13 +343,17 @@ class SportVenueTable extends _i1.Table {
 
   final aminities = _i1.ColumnSerializable('aminities');
 
+  final openingTime = _i1.ColumnInt('openingTime');
+
+  final closingTime = _i1.ColumnInt('closingTime');
+
   @override
   List<_i1.Column> get columns => [
         id,
         name,
         address,
         locationUrl,
-        openTiming,
+        city,
         aboutVenue,
         gstNumber,
         socialMediaIds,
@@ -336,6 +361,8 @@ class SportVenueTable extends _i1.Table {
         contactNumber,
         imageUrl,
         aminities,
+        openingTime,
+        closingTime,
       ];
 }
 
