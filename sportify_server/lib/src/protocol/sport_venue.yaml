@@ -4,7 +4,7 @@ fields:
   name: String
   address: String
   locationUrl: String
-  openTiming: String
+  city: String
   aboutVenue: String
   gstNumber: String
   socialMediaIds: List<String>
@@ -12,3 +12,5 @@ fields:
   contactNumber: String
   imageUrl: List<String>
   aminities: List<int>
+  openingTime: int
+  closingTime: int

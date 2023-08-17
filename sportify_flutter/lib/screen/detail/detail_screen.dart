@@ -165,7 +165,7 @@ class DetailScreen extends StatelessWidget {
                       width: 16.0,
                     ),
                     Text(
-                      field.sportVenue!.openTiming,
+                      field.sportVenue!.openingTime.toString(),
                       style: descTextStyle,
                     ),
                   ],
@@ -253,9 +253,8 @@ class DetailScreen extends StatelessWidget {
         //   field.imageAsset,
         //   fit: BoxFit.cover,
         // ),
-        background: Image.network(
-            'https://images.unsplash.com/photo-1617696618050-b0fef0c666af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            fit: BoxFit.cover),
+        background:
+            Image.network(field.sportVenue.imageUrl[0], fit: BoxFit.cover),
         collapseMode: CollapseMode.parallax,
       ),
       leading: Padding(

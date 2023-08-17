@@ -244,7 +244,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
-          name: 'openTiming',
+          name: 'city',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
@@ -290,6 +290,18 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.json,
           isNullable: false,
           dartType: 'List<int>',
+        ),
+        _i2.ColumnDefinition(
+          name: 'openingTime',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'closingTime',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
         ),
       ],
       foreignKeys: [],
