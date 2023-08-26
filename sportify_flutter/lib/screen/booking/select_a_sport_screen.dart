@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sportify_flutter/models/sportCategoryDetails.dart';
 import 'package:sportify_flutter/models/sportVenueDetails.dart';
+import 'package:sportify_flutter/screen/detail/checkout_screen.dart';
 
 /*
 SportVenueDetail is a custom object created to display the details.
@@ -39,9 +41,35 @@ pass the SportVenueDetail object and index of the <List>SportCategoryDetails whi
 class SelectASportScreen extends StatelessWidget {
   SportVenueDetail sportVenueDetail;
   SelectASportScreen({required this.sportVenueDetail});
+  List<SportCategoryDetails>? items = [];
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    items = sportVenueDetail.sportCategories;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select a sport to continue'),
+      ),
+      body: ListView.builder(
+        itemCount: items!.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              // Handle item click
+              print('Clicked on: ${items![index]}');
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CheckoutScreen(
+                  field: sportVenueDetail,
+                  sportCategoryIndex: index,
+                );
+              }));
+            },
+            child: ListTile(
+              title: Text(items![index].sportCategory!.name),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
