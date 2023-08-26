@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sportify_client/sportify_client.dart';
 import 'package:sportify_flutter/models/sportVenueDetails.dart';
+import 'package:sportify_flutter/screen/booking/select_a_sport_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../model/sport_field.dart';
@@ -201,20 +202,9 @@ class DetailScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(borderRadiusSize))),
             onPressed: () {
-              // this will be removed from here and will go to the select_a_sport screen's onClick
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CheckoutScreen(
-                  field: field,
-                  sportCategoryIndex: 0,
-                );
+                return SelectASportScreen(sportVenueDetail: field);
               }));
-
-              // Show an option to select sport, call the select_a_sport screen with param field
-              var sports = [];
-              for (var element in field.sportCategories ?? []) {
-                sports.add(element.sportCategory.name);
-              }
-              print(sports);
             },
             child: const Text("Book Now")),
       ),
