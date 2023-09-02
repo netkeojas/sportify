@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
 import 'package:sportify_client/src/protocol/sport_venue_booking.dart';
 
 import '../../helper.dart/checkout_screen_helper.dart';
 import '../../main.dart';
+import '../../utils/dummy_data.dart';
 import '../main/main_screen.dart';
 
 /**
@@ -29,22 +31,49 @@ class ConfirmCheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Static Text Fields Example'),
+        title: const Text('Confirm booking'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(
-              'Booking details: ' +
-                  booking.dateOfBooking.toString() +
-                  'Start time: ' +
-                  booking.startTimeOfBooking.toString() +
-                  'End time: ' +
-                  '${booking.startTimeOfBooking + booking.numberOfHours}',
-              style: TextStyle(fontSize: 18),
+            Row(
+              children: [
+                const Text('Booking date: '),
+                const SizedBox(
+                  width: 2,
+                ),
+                Text(DateFormat('yyyy-MM-dd').format(
+                  booking.dateOfBooking.toLocal(),
+                ))
+              ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(
+              height: 4,
+            ),
+            Row(
+              children: [
+                const Text('Start time: '),
+                const SizedBox(
+                  width: 2,
+                ),
+                Text(timeMap[booking.startTimeOfBooking]!)
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Row(
+              children: [
+                const Text('End time: '),
+                const SizedBox(
+                  width: 2,
+                ),
+                Text(timeMap[
+                    booking.startTimeOfBooking + booking.numberOfHours]!)
+              ],
+            ),
+            const SizedBox(height: 16),
             Text(
               'Amount to be paid: ' + booking.totalAmount.toString(),
               style: TextStyle(fontSize: 18),
@@ -77,12 +106,14 @@ class ConfirmCheckoutScreen extends StatelessWidget {
                   _showSnackBar(
                       context,
                       'Booked the time slot : ' +
-                          booking.startTimeOfBooking.toString() +
+                          timeMap[booking.startTimeOfBooking]! +
                           ' - ' +
-                          (booking.startTimeOfBooking + booking.numberOfHours)
-                              .toString() +
+                          timeMap[booking.startTimeOfBooking +
+                              booking.numberOfHours]! +
                           ' on ' +
-                          booking.dateOfBooking.toString());
+                          DateFormat('yyyy-MM-dd').format(
+                            booking.dateOfBooking.toLocal(),
+                          ));
                 },
                 child: Text('Confirm booking'),
               ),

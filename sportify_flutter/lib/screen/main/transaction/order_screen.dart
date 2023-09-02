@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sportify_client/sportify_client.dart';
 import 'package:sportify_flutter/main.dart';
 
@@ -15,7 +16,7 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   List<FieldOrder> fieldOrderList = dummyUserOrderList;
 
-  List<SportVenueBooking> _sportVenueBookings = [];
+  List<SportBookingDetails> _sportVenueBookings = [];
 
   @override
   void initState() {
@@ -24,8 +25,8 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   fetchSportBookings() async {
-    var sportBookings =
-        await client.sportVenueBooking.getAllSportVenueBookings();
+    var sportBookings = await client.sportBookingDetails
+        .getSportVenueBookingDetailsForPlayer(1);
     if (sportBookings != null) {
       setState(() {
         _sportVenueBookings = sportBookings;
@@ -73,20 +74,65 @@ class _OrderScreenState extends State<OrderScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  _sportVenueBookings[index]
-                                      .venueSportHasAreaId
-                                      .toString(),
-                                  style: normalTextStyle,
+                                Row(
+                                  children: [
+                                    Text(
+                                      _sportVenueBookings[index]
+                                          .venueArea!
+                                          .name
+                                          .toString(),
+                                      style: normalTextStyle,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      _sportVenueBookings[index]
+                                          .venue!
+                                          .name
+                                          .toString(),
+                                      style: normalTextStyle,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      _sportVenueBookings[index]
+                                          .sportCategory!
+                                          .name
+                                          .toString(),
+                                      style: normalTextStyle,
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 4,
                                 ),
-                                Text(
-                                    _sportVenueBookings[index]
-                                        .dateOfBooking
-                                        .toIso8601String(),
-                                    style: normalTextStyle),
+                                Row(
+                                  children: [
+                                    Text(
+                                        DateFormat('yyyy-MM-dd').format(
+                                          _sportVenueBookings[index]
+                                              .dateOfBooking
+                                              .toLocal(),
+                                        ),
+                                        style: normalTextStyle),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    const Text('||'),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(timeMap[_sportVenueBookings[index]
+                                                .startTime]
+                                            .toString() +
+                                        ' - ' +
+                                        timeMap[_sportVenueBookings[index]
+                                                .endTime]
+                                            .toString()),
+                                  ],
+                                ),
                               ],
                             ),
                             const Spacer(),

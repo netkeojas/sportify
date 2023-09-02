@@ -40,10 +40,32 @@ class DetailScreen extends StatelessWidget {
                       width: 16.0,
                     ),
                     Flexible(
-                      child: Text(
-                        field.address.toString(),
-                        overflow: TextOverflow.visible,
-                        style: addressTextStyle,
+                      // child: Text(
+                      //   field.address.toString(),
+                      //   overflow: TextOverflow.visible,
+                      //   style: addressTextStyle,
+                      // ),
+                      child: InkWell(
+                        child: Column(
+                          children: [
+                            Text(
+                              field.address.toString(),
+                              overflow: TextOverflow.visible,
+                              style: addressTextStyle,
+                            ),
+                            SizedBox(height: 8.0),
+                            TextButton(
+                              onPressed: () {
+                                launchUrl(
+                                    Uri.parse(field.sportVenue!.locationUrl));
+                              },
+                              child: Text(
+                                'Show in Map',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
