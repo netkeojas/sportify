@@ -3,9 +3,13 @@ import 'package:sportify_flutter/helper.dart/date_time_helper.dart';
 import 'package:sportify_flutter/models/time_slot.dart';
 import 'dart:math';
 
+import '../models/sport_venue_booking_flutter.dart';
+
 // Add a check for booking status as well to fetch correct data
+// TODO - data is incorrect for more than 1 hour time slots
 Future<List<TimeSlot>> fetchBookedSlotsOfDay(
     bookingClient, venueAreaId, dateOfBooking) async {
+  print("date-time: $dateOfBooking");
   var bookingList = await bookingClient.getAllSportVenueBookingsForDateAndArea(
       venueSportHasAreaId: venueAreaId, dateTime: dateOfBooking);
   List<TimeSlot> bookedTimeSlots = [];
@@ -62,17 +66,17 @@ Future<SportVenueBooking> createBooking(
       numberOfhours,
       dateOfBooking.weekday);
   print("createBooking - dateOfBooking: $dateOfBooking");
-  return SportVenueBooking(
+  return SportVenueBookingFlutter(
       playerId: playerId,
       venueSportHasAreaId: venueSportHasAreaId,
-      dateOfBooking: dateOfBooking,
+      dateOfBooking: convertToDateOnlyFormat(dateTime: dateOfBooking),
       dayOfWeekId: dateOfBooking.weekday,
       startTimeOfBooking: startTimeOfBooking,
       totalAmount: totalAmount,
       amountPaid: 0,
       bookingStatus: 'PENDING_PAYMENT',
       bookingTimeStamp: DateTime.now().toLocal(),
-      numberOfHours: 1);
+      numberOfHours: numberOfhours);
 }
 
 calculateTotalAmountToBePaid(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sportify_client/sportify_client.dart';
 import 'package:sportify_flutter/helper.dart/checkout_screen_helper.dart';
+import 'package:sportify_flutter/helper.dart/date_time_helper.dart';
 import 'package:sportify_flutter/main.dart';
 import 'package:sportify_flutter/models/sportVenueDetails.dart';
 import 'package:sportify_flutter/models/time_slot.dart';
@@ -40,6 +41,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   List<SportVenueFacilityDetail>? _sportVenueFacilityDetail;
   List<TimeSlot>? _timeSlot;
   VenueSportHasArea? _venueSportHasAreaDropDownItem;
+  int startTimeOfPlay = 0;
+  CheckBoxState selectedValue = CheckBoxState(title: "00.00", isBooked: true);
 
   @override
   void initState() {
@@ -77,7 +80,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     var sportAreaList = await venueHasSportAreaClient
         .getVenueSportHasAreaByVenueSportId(venueSportId: venueSportId);
     fetchFacilityDetails(client.sportVenueFacilityDetail, sportAreaList![0].id);
-    setTimeSlots(sportAreaList![0].id, sportAreaList);
+    setTimeSlots(sportAreaList![0].id, sportAreaList, _dateTime);
     // print(sportAreaList);
     setState(() {
       _venueSportHasAreaList = sportAreaList;
@@ -96,16 +99,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     });
   }
 
-  setTimeSlots(venueHasAreaId, sportAreaList) async {
+  setTimeSlots(venueHasAreaId, sportAreaList, dateTime) async {
     if (sportAreaList != null) {
       print("INside setTimeSlote");
       print(venueHasAreaId);
-      print(_dateTime);
+      print(dateTime);
       var timeSlot = await fetchBookedSlotsOfDay(
           client.sportVenueBooking,
           venueHasAreaId,
-          DateTime(_dateTime.year, _dateTime.month, _dateTime.day));
-      print('Next step');
+          DateTime(dateTime.year, dateTime.month, dateTime.day));
+      print("Next step timeSlot: $timeSlot");
       for (var time in timeList) {
         if (time == widget.field.sportVenue!.openingTime) {
           currentTime = time;
@@ -113,24 +116,38 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         }
       }
       var startTimesOfBookedTimeSlots = [];
-      // for (var element in timeSlot) {
-      //   startTimesOfBookedTimeSlots.add(element.fromTime);
-      // }
-      availableBookTime.removeAt(0);
-      for (int i = timeList.indexOf(currentTime); i < 24; i++) {
-        if (currentTime == widget.field.sportVenue!.closingTime) {
-          break;
+      for (var element in timeSlot) {
+        if ((element.toTime!.toInt() - element.fromTime!.toInt()) == 1) {
+          startTimesOfBookedTimeSlots.add(element.fromTime);
         } else {
-          if (timeSlot.isNotEmpty) {
-            // disable the booked time slots and only make unbooked slots available
+          for (var c = 0;
+              c < (element.toTime!.toInt() - element.fromTime!.toInt());
+              c++) {
+            startTimesOfBookedTimeSlots.add((element.fromTime)! + c);
           }
-          availableBookTime
-              .add(CheckBoxState(title: "${timeList[i]}", isBooked: false));
-          currentTime = timeList[i + 1];
         }
       }
 
       setState(() {
+        availableBookTime.removeAt(0);
+        for (int i = timeList.indexOf(currentTime); i < 24; i++) {
+          if (currentTime == widget.field.sportVenue!.closingTime) {
+            break;
+          } else {
+            if (((convertToDateOnlyFormat(dateTime: dateTime) ==
+                        convertToDateOnlyFormat(dateTime: DateTime.now())) &&
+                    (DateTime.now().hour >= i)) ||
+                (timeSlot.isNotEmpty &&
+                    startTimesOfBookedTimeSlots.contains(i))) {
+              availableBookTime
+                  .add(CheckBoxState(title: "${timeMap[i]}", isBooked: true));
+            } else {
+              availableBookTime
+                  .add(CheckBoxState(title: "${timeMap[i]}", isBooked: false));
+            }
+            currentTime = timeList[i + 1];
+          }
+        }
         _timeSlot = timeSlot;
       });
     }
@@ -248,7 +265,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(
                       height: 8,
                     ),
-                    ...availableBookTime.map(buildSingleCheckBox).toList(),
+                    // ...availableBookTime.map(buildSingleCheckBox).toList(),
+                    buildRadioButtonList()
                   ],
                 ),
               ])),
@@ -326,8 +344,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     _venueSportHasAreaDropDownItem!.id,
                                     DateTime(_dateTime.year, _dateTime.month,
                                         _dateTime.day),
-                                    19,
-                                    1,
+                                    startTimeOfPlay,
+                                    2,
                                     _sportVenueFacilityDetail);
                             print(sportVenueBooking);
                             // pass this object to the confirm_checkout_screen which will be a pop up screen showing details of booking
@@ -375,13 +393,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             initialDate: DateTime.now(),
             firstDate: DateTime.now(),
             lastDate: DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day + 6))
+                DateTime.now().day + 30))
         .then((value) {
       if (value == null) return;
+      availableBookTime = [
+        CheckBoxState(title: "00.00", isBooked: true),
+      ];
       setState(() {
         _dateTime = value.toLocal();
+        setTimeSlots(_venueSportHasAreaDropDownItem!.id, _venueSportHasAreaList,
+            value.toLocal());
       });
-      setTimeSlots(_venueSportHasAreaDropDownItem!.id, _venueSportHasAreaList);
     });
   }
 
@@ -402,29 +424,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         print("in checkbox");
         setState(() {
           checkbox.value = value!;
-        });
-        int totalSelectedTime = 1;
-        // for (int i = 0; i < availableBookTime.length; i++) {
-        //   if (availableBookTime[i].value == true) {
-        //     totalSelectedTime = timeMap[availableBookTime[i].title]!;
-        //   }
-        // }
-        // SportVenueBooking sportVenueBooking = await createBooking(
-        //     widget.field.sportVenueId,
-        //     _venueSportHasAreaDropDownItem!.id,
-        //     DateTime(_dateTime.year, _dateTime.month, _dateTime.day),
-        //     8,
-        //     1,
-        //     _sportVenueFacilityDetail);
-        setState(() {
-          _totalBill = 20 * totalSelectedTime;
-          if (totalSelectedTime > 0) {
-            _enableCreateOrderBtn = true;
-          } else {
-            _enableCreateOrderBtn = false;
-          }
+          _enableCreateOrderBtn = value;
+          if (value == true) startTimeOfPlay = reversedTimeMap[checkbox.title]!;
         });
       },
+    );
+  }
+
+  Widget buildRadioButtonList() {
+    List<Widget> widgetList = [];
+    for (var i = 0; i < availableBookTime.length; i++) {
+      if (availableBookTime[i].isBooked) {
+        widgetList.add(RadioListTile(
+            title: Text(availableBookTime[i].title),
+            value: availableBookTime[i],
+            groupValue: selectedValue,
+            onChanged: null));
+      } else {
+        widgetList.add(RadioListTile(
+          title: Text(availableBookTime[i].title),
+          value: availableBookTime[i],
+          groupValue: selectedValue,
+          onChanged: (newValue) {
+            setState(() {
+              selectedValue = newValue as CheckBoxState;
+              _enableCreateOrderBtn = true;
+              startTimeOfPlay = reversedTimeMap[newValue.title]!;
+            });
+          },
+        ));
+      }
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: widgetList,
     );
   }
 
@@ -441,16 +474,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       onChanged: (VenueSportHasArea? value) async {
         // This is called when the user selects an item.
         print("value: $value");
-        _timeSlot = await fetchBookedSlotsOfDay(client.sportVenueBooking,
-            _venueSportHasAreaDropDownItem!.id, _dateTime);
+        // _timeSlot = await fetchBookedSlotsOfDay(client.sportVenueBooking,
+        //     _venueSportHasAreaDropDownItem!.id, _dateTime);
         print("_timeSlot: $_timeSlot");
+        availableBookTime = [
+          CheckBoxState(title: "00.00", isBooked: true),
+        ];
         setState(() {
           _venueSportHasAreaDropDownItem = value!;
+          setTimeSlots(value.id, _venueSportHasAreaList, _dateTime);
         });
-        fetchFacilityDetails(client.sportVenueFacilityDetail,
+        print("after set state: $_venueSportHasAreaDropDownItem");
+        await fetchFacilityDetails(client.sportVenueFacilityDetail,
             _venueSportHasAreaDropDownItem!.id);
-        // setTimeSlots(
-        //     _venueSportHasAreaDropDownItem!.id, _venueSportHasAreaDropDownItem);
       },
       items: _venueSportHasAreaList!.map((VenueSportHasArea venueSportHasArea) {
         return DropdownMenuItem<VenueSportHasArea>(

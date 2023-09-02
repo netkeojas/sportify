@@ -257,8 +257,34 @@ List<int> timeToBook = [
   20,
   21,
   22,
-  23,
-  24
+  23
 ];
 
-var timeMap = <String, int>{};
+var timeMap = <int, String>{
+  0: '12 am',
+  1: '01 am',
+  2: '02 am',
+  3: '03 am',
+  4: '04 am',
+  5: '05 am',
+  6: '06 am',
+  7: '07 am',
+  8: '08 am',
+  9: '09 am',
+  10: '10 am',
+  11: '11 am',
+  12: '12 pm',
+  13: '01 pm',
+  14: '02 pm',
+  15: '03 pm',
+  16: '04 pm',
+  17: '05 pm',
+  18: '06 pm',
+  19: '07 pm',
+  20: '08 pm',
+  21: '09 pm',
+  22: '10 pm',
+  23: '11 pm',
+};
+
+var reversedTimeMap = timeMap.map((key, value) => MapEntry(value, key));

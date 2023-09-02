@@ -1,0 +1,13 @@
+class: SportBookingDetails
+fields:
+  player: Player?
+  venueArea: VenueSportHasArea?
+  sportCategory: SportCategory?
+  venue: SportVenue?
+  dateOfBooking: DateTime
+  startTime: int
+  endTime: int
+  totalAmount: double
+  amountPaid: double
+  balance: double
+  bookingStatus: String
