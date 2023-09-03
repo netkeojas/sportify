@@ -11,9 +11,9 @@ import 'package:sportify_flutter/theme.dart';
 // The client is set up to connect to a Serverpod running on a local server on
 // the default port. You will need to modify this to connect to staging or
 // production servers.
-var client = Client('http://localhost:8080/')
+// var client = Client('http://localhost:8080/')
 //   ..connectivityMonitor = FlutterConnectivityMonitor();
-// var client = Client('http://192.168.1.2:8080/')
+var client = Client('http://192.168.1.2:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
 Future<void> main() async {
