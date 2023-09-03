@@ -9,11 +9,9 @@ import 'package:sportify_flutter/models/sportVenueDetails.dart';
 import 'package:sportify_flutter/models/time_slot.dart';
 import 'package:sportify_flutter/screen/booking/confirm_checkout_screen.dart';
 import '../../model/checkbox_state.dart';
-import '../../model/field_order.dart';
-import '../../model/sport_field.dart';
 import '../../theme.dart';
 import '../../utils/dummy_data.dart';
-import '../main/main_screen.dart';
+import 'package:number_inc_dec/number_inc_dec.dart';
 
 class CheckoutScreen extends StatefulWidget {
   // SportField field;
@@ -43,6 +41,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   VenueSportHasArea? _venueSportHasAreaDropDownItem;
   int startTimeOfPlay = 0;
   CheckBoxState selectedValue = CheckBoxState(title: "00.00", isBooked: true);
+  bool _nextHourIsBooked = false;
+  bool _isTimeIncrementerVisible = false;
+  int _numberOfHoursToPlay = 1;
 
   @override
   void initState() {
@@ -258,6 +259,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(
                       height: 32,
                     ),
+                    Visibility(
+                      visible: _isTimeIncrementerVisible,
+                      child: Text(
+                        "Pick number of hours",
+                        style: subTitleTextStyle,
+                      ),
+                    ),
+                    Visibility(
+                      visible: _isTimeIncrementerVisible,
+                      child: const SizedBox(
+                        height: 8,
+                      ),
+                    ),
+                    Visibility(
+                      visible: _isTimeIncrementerVisible,
+                      child: NumberInputPrefabbed.roundedButtons(
+                        controller: TextEditingController(),
+                        incDecBgColor: primaryColor500,
+                        buttonArrangement: ButtonArrangement.incRightDecLeft,
+                        min: 1,
+                        enabled: !_nextHourIsBooked,
+                        initialValue: _numberOfHoursToPlay,
+                        max: availableBookTime.length,
+                        onIncrement: (newValue) async {
+                          _numberOfHoursToPlay = newValue as int;
+                        },
+                        onDecrement: (newValue) {
+                          _numberOfHoursToPlay = newValue as int;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Text(
                       "Pick a Start Time",
                       style: subTitleTextStyle,
@@ -265,7 +300,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(
                       height: 8,
                     ),
-                    // ...availableBookTime.map(buildSingleCheckBox).toList(),
                     buildRadioButtonList()
                   ],
                 ),
@@ -345,7 +379,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     DateTime(_dateTime.year, _dateTime.month,
                                         _dateTime.day),
                                     startTimeOfPlay,
-                                    2,
+                                    _numberOfHoursToPlay,
                                     _sportVenueFacilityDetail);
                             print(sportVenueBooking);
                             // pass this object to the confirm_checkout_screen which will be a pop up screen showing details of booking
@@ -447,9 +481,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           groupValue: selectedValue,
           onChanged: (newValue) {
             setState(() {
+              _numberOfHoursToPlay = 1;
               selectedValue = newValue as CheckBoxState;
               _enableCreateOrderBtn = true;
               startTimeOfPlay = reversedTimeMap[newValue.title]!;
+              if (i < availableBookTime.length - 1) {
+                _isTimeIncrementerVisible = true;
+                if (availableBookTime[i + 1].isBooked) {
+                  _isTimeIncrementerVisible = false;
+                  _nextHourIsBooked = true;
+                } else {
+                  _nextHourIsBooked = false;
+                }
+              } else {
+                _isTimeIncrementerVisible = false;
+                _nextHourIsBooked = true;
+              }
             });
           },
         ));
